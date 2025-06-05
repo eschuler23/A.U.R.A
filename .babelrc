@@ -1,0 +1,31 @@
+{
+  "presets": [
+    "@babel/env",
+    "@babel/react"
+  ],
+  "plugins": [
+    [
+      "@babel/transform-runtime",
+      { "regenerator": true }
+    ],
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/core",
+
+        "libraryDirectory": "esm",
+        "camel2DashComponentName": false
+      },
+      "core"
+    ],
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/icons",
+        "libraryDirectory": "esm",
+        "camel2DashComponentName": false
+      },
+      "icons"
+    ]
+  ]
+}
