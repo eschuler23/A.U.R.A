@@ -32,12 +32,21 @@ const AddLog = () => {
       sx={{
         width: '100%',
         height: '100%',
-        padding: isMobile ? 2 : 3
+        padding: theme.spacing(isMobile ? 2 : 3)
       }}
     >
       <Typography variant={isMobile ? 'h5' : 'h4'} align="center">
         Add New Log
       </Typography>
+
+      <TextField
+        label="Tags"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+        fullWidth
+        placeholder="Enter tags separated by commas"
+        size={isMobile ? 'small' : 'medium'}
+      />
 
       <Button
         variant="contained"
@@ -62,15 +71,6 @@ const AddLog = () => {
           {selectedImage.name}
         </Typography>
       )}
-
-      <TextField
-        label="Tags"
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-        fullWidth
-        placeholder="Enter tags separated by commas"
-        size={isMobile ? 'small' : 'medium'}
-      />
 
       <Button
         variant="contained"

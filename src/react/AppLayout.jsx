@@ -24,9 +24,9 @@ const AppLayout = () => {
       sx={{
         width: '100%',
         height: '100%',
-        paddingTop: theme => theme.spacing(isMobile ? 2 : 5),
-        paddingBottom: theme => theme.spacing(isMobile ? 2 : 5),
-        paddingX: theme => theme.spacing(isMobile ? 1 : 2)
+        paddingTop: isMobile ? theme.spacing(2) : theme.spacing(5),
+        paddingBottom: isMobile ? theme.spacing(2) : theme.spacing(5),
+        paddingX: isMobile ? theme.spacing(1) : theme.spacing(2)
       }}
     >
       <Container
@@ -53,7 +53,7 @@ const AppLayout = () => {
               height: isMobile ? '32px' : '40px'
             }}
           />
-          <Typography variant={isMobile ? "h6" : "h5"}>
+          <Typography variant={isMobile ? 'h6' : 'h5'}>
             A.U.R.A
           </Typography>
         </Stack>
@@ -63,10 +63,10 @@ const AppLayout = () => {
             flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
-            padding: theme => theme.spacing(isMobile ? 1 : 2),
+            padding: isMobile ? theme.spacing(1) : theme.spacing(2),
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900]
+            borderRadius: theme.spacing(borderRadius),
+            background: theme.palette.grey[900]
           }}
         >
           <Stack
@@ -74,8 +74,8 @@ const AppLayout = () => {
             direction="column"
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper
+              borderRadius: theme.spacing(borderRadius),
+              background: theme.palette.background.paper
             }}
           >
             <AppRoutes />
