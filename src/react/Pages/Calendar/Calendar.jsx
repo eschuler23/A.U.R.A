@@ -1,0 +1,37 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Stack, Button, Typography, useTheme, useMediaQuery } from '@mui/material'
+import { Add as AddIcon } from '@mui/icons-material'
+
+const Calendar = () => {
+  const navigate = useNavigate()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  
+  return (
+    <Stack 
+      spacing={isMobile ? 2 : 3} 
+      alignItems="center"
+      sx={{
+        width: '100%',
+        height: '100%',
+        padding: theme => theme.spacing(isMobile ? 2 : 3)
+      }}
+    >
+      <Typography variant={isMobile ? "h5" : "h4"}>Calendar</Typography>
+      <Button 
+        variant="contained" 
+        startIcon={<AddIcon />}
+        onClick={() => navigate('/add-log')}
+        size={isMobile ? "medium" : "large"}
+        sx={{
+          minWidth: isMobile ? 'auto' : '200px'
+        }}
+      >
+        Add Log
+      </Button>
+    </Stack>
+  )
+}
+
+export default Calendar
