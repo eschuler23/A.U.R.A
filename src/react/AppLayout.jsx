@@ -1,35 +1,21 @@
 import React from 'react'
-
-import { useLocation, useNavigate } from 'react-router-dom'
-
 import {
   Stack,
   Typography,
   Container,
   Paper,
-  BottomNavigation,
-  BottomNavigationAction
+  useTheme,
+  useMediaQuery
 } from '@mui/material'
 
-import {
-  HealthAndSafety as HomeIcon,
-  Pets as CatIcon,
-  Person4 as ProfileIcon
-} from '@mui/icons-material'
-
 import AppRoutes from './AppRoutes'
-
 import AppLogo from '../assets/favicon.svg'
 
 const borderRadius = 6
 
 const AppLayout = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-
-  let navigationIndex = 0
-  if (location.pathname.startsWith('/catnames')) navigationIndex = 1
-  if (location.pathname.startsWith('/profile')) navigationIndex = 2
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Stack
@@ -38,12 +24,13 @@ const AppLayout = () => {
       sx={{
         width: '100%',
         height: '100%',
-        paddingTop: theme => theme.spacing(5),
-        paddingBottom: theme => theme.spacing(5)
+        paddingTop: theme => theme.spacing(isMobile ? 2 : 5),
+        paddingBottom: theme => theme.spacing(isMobile ? 2 : 5),
+        paddingX: theme => theme.spacing(isMobile ? 1 : 2)
       }}
     >
       <Container
-        maxWidth="xs"
+        maxWidth="sm"
         disableGutters
         sx={{
           display: 'flex',
@@ -55,18 +42,19 @@ const AppLayout = () => {
           direction="row"
           justifyContent="center"
           alignItems="center"
-          marginBottom={2}
+          marginBottom={isMobile ? 1 : 2}
+          spacing={1}
         >
           <img
             src={AppLogo}
             alt="App Logo"
             style={{
-              width: '40px',
-              height: '40px'
+              width: isMobile ? '32px' : '40px',
+              height: isMobile ? '32px' : '40px'
             }}
           />
-          <Typography variant="h5">
-            My Mobile Health App
+          <Typography variant={isMobile ? "h6" : "h5"}>
+            A.U.R.A
           </Typography>
         </Stack>
         <Paper
@@ -75,10 +63,7 @@ const AppLayout = () => {
             flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
-            paddingTop: 2,
-            paddingRight: 1,
-            paddingBottom: 2,
-            paddingLeft: 1,
+            padding: theme => theme.spacing(isMobile ? 1 : 2),
             overflow: 'hidden',
             borderRadius: theme => theme.spacing(borderRadius),
             background: theme => theme.palette.grey[900]
@@ -87,8 +72,6 @@ const AppLayout = () => {
           <Stack
             flex="1 1 auto"
             direction="column"
-            justifyContent="center"
-            alignItems="center"
             sx={{
               overflow: 'hidden',
               borderRadius: theme => theme.spacing(borderRadius),
@@ -96,27 +79,6 @@ const AppLayout = () => {
             }}
           >
             <AppRoutes />
-            <BottomNavigation
-              showLabels
-              value={navigationIndex}
-              sx={{ width: '100%' }}
-            >
-              <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon />}
-                onClick={() => navigate('/')}
-              />
-              <BottomNavigationAction
-                label="Cat Names"
-                icon={<CatIcon />}
-                onClick={() => navigate('/catnames')}
-              />
-              <BottomNavigationAction
-                label="Profile"
-                icon={<ProfileIcon />}
-                onClick={() => navigate('/profile')}
-              />
-            </BottomNavigation>
           </Stack>
         </Paper>
       </Container>
