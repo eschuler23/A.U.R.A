@@ -78,10 +78,6 @@ const AddLog = () => {
         }}
       >
         <Stack spacing={isMobile ? 2 : 3}>
-          <Typography variant={isMobile ? 'h5' : 'h4'} align="center">
-            Add New Log
-          </Typography>
-
           <TextField
             label="Tags"
             value={tags}
@@ -105,7 +101,6 @@ const AddLog = () => {
             <Stack spacing={1} alignItems="center">
               <Typography variant="body2" color="textSecondary">
                 Selected:
-                {' '}
                 {selectedImage.name}
               </Typography>
               <img
@@ -146,11 +141,7 @@ const AddLog = () => {
         </Button>
       </Box>
 
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleMenuClose}
-      >
+      <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
         <MenuItem component="div">
           <Button
             component="label"
