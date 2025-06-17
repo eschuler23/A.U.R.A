@@ -69,13 +69,12 @@ const AddLog = () => {
         overflow: 'hidden'
       }}
     >
-      {/* Scrollable content area */}
       <Box
         sx={{
           flex: 1,
           overflowY: 'auto',
           padding: theme.spacing(isMobile ? 2 : 3),
-          paddingBottom: '80px' // Space for the button
+          paddingBottom: '80px'
         }}
       >
         <Stack spacing={isMobile ? 2 : 3}>
@@ -124,7 +123,6 @@ const AddLog = () => {
         </Stack>
       </Box>
 
-      {/* Fixed button at bottom */}
       <Box
         sx={{
           position: 'absolute',
