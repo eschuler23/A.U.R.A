@@ -1,6 +1,13 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Stack, Button, Typography, Box, useTheme, useMediaQuery } from '@mui/material'
+import {
+  Stack,
+  Button,
+  Typography,
+  Box,
+  useTheme,
+  useMediaQuery
+} from '@mui/material'
 
 const LogResult = () => {
   const navigate = useNavigate()
@@ -28,20 +35,20 @@ const LogResult = () => {
         }}
       >
         <Stack spacing={isMobile ? 2 : 3}>
-          <Typography variant={isMobile ? 'h5' : 'h4'} align="center">
-            Log Summary
-          </Typography>
-
           {tags && (
             <Box>
-              <Typography variant={isMobile ? 'subtitle1' : 'h6'}>Tags:</Typography>
+              <Typography variant={isMobile ? 'subtitle1' : 'h6'}>
+                Tags:
+              </Typography>
               <Typography>{tags}</Typography>
             </Box>
           )}
 
           {imageUrl && (
             <Box>
-              <Typography variant={isMobile ? 'subtitle1' : 'h6'}>Image:</Typography>
+              <Typography variant={isMobile ? 'subtitle1' : 'h6'}>
+                Image:
+              </Typography>
               <Box
                 component="img"
                 src={imageUrl}
