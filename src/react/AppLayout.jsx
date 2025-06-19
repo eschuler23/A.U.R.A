@@ -53,9 +53,7 @@ const AppLayout = () => {
               height: isMobile ? '32px' : '40px'
             }}
           />
-          <Typography variant={isMobile ? 'h6' : 'h5'}>
-            A.U.R.A
-          </Typography>
+          <Typography variant={isMobile ? 'h6' : 'h5'}>A.U.R.A</Typography>
         </Stack>
         <Paper
           elevation={6}
