@@ -1,20 +1,11 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import {
-  Stack,
-  Button,
-  Typography,
-  Box,
-  useTheme,
-  useMediaQuery
-} from '@mui/material'
+import { Stack, Button, Typography, Box } from '@mui/material'
 
 const LogResult = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { tags, imageUrl } = location.state || {}
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Stack
@@ -30,32 +21,28 @@ const LogResult = () => {
         sx={{
           flex: 1,
           overflowY: 'auto',
-          padding: theme.spacing(isMobile ? 2 : 3),
+          padding: 2,
           paddingBottom: '80px'
         }}
       >
-        <Stack spacing={isMobile ? 2 : 3}>
+        <Stack spacing={3}>
           {tags && (
             <Box>
-              <Typography variant={isMobile ? 'subtitle1' : 'h6'}>
-                Tags:
-              </Typography>
+              <Typography variant="h6">Tags:</Typography>
               <Typography>{tags}</Typography>
             </Box>
           )}
 
           {imageUrl && (
             <Box>
-              <Typography variant={isMobile ? 'subtitle1' : 'h6'}>
-                Image:
-              </Typography>
+              <Typography variant="h6">Image:</Typography>
               <Box
                 component="img"
                 src={imageUrl}
                 alt="Uploaded"
                 sx={{
                   width: '100%',
-                  maxHeight: isMobile ? 200 : 300,
+                  maxHeight: 300,
                   objectFit: 'contain',
                   borderRadius: 1
                 }}
@@ -71,7 +58,7 @@ const LogResult = () => {
           bottom: 0,
           left: 0,
           right: 0,
-          padding: theme.spacing(isMobile ? 1.5 : 2),
+          padding: 2,
           backgroundColor: 'background.paper',
           borderTop: 1,
           borderColor: 'divider'
@@ -81,7 +68,7 @@ const LogResult = () => {
           variant="contained"
           onClick={() => navigate('/')}
           fullWidth
-          size={isMobile ? 'medium' : 'large'}
+          size="large"
           color="primary"
         >
           Add to Tracking
