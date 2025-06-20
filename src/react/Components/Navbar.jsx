@@ -7,7 +7,6 @@ const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // Determine page title and back navigation based on current route
   const getPageConfig = () => {
     switch (location.pathname) {
       case '/':
@@ -63,7 +62,6 @@ const Navbar = () => {
           paddingX: 1
         }}
       >
-        {/* Left side - Back button or empty space */}
         <div
           style={{
             width: '48px',
@@ -83,7 +81,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Center - Page title */}
         <Typography
           variant="h5"
           component="h1"
@@ -96,7 +93,6 @@ const Navbar = () => {
           {title}
         </Typography>
 
-        {/* Right side - Empty space for symmetry */}
         <div style={{ width: '48px' }} />
       </Toolbar>
     </AppBar>
