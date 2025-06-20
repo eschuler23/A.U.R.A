@@ -5,8 +5,6 @@ import {
   Button,
   TextField,
   Typography,
-  useTheme,
-  useMediaQuery,
   Menu,
   MenuItem,
   Box
@@ -19,8 +17,6 @@ import {
 
 const AddLog = () => {
   const navigate = useNavigate()
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [tags, setTags] = useState('')
   const [selectedImage, setSelectedImage] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
@@ -73,25 +69,23 @@ const AddLog = () => {
         sx={{
           flex: 1,
           overflowY: 'auto',
-          padding: theme.spacing(isMobile ? 2 : 3),
+          padding: 3,
           paddingBottom: '80px'
         }}
       >
-        <Stack spacing={isMobile ? 2 : 3}>
+        <Stack spacing={3}>
           <TextField
             label="Tags"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             fullWidth
             placeholder="Enter tags separated by commas"
-            size={isMobile ? 'small' : 'medium'}
           />
 
           <Button
             variant="contained"
             onClick={handleMenuClick}
             fullWidth
-            size={isMobile ? 'medium' : 'large'}
             startIcon={<ImageIcon />}
           >
             {selectedImage ? 'Change Image' : 'Add Image'}
@@ -110,7 +104,7 @@ const AddLog = () => {
                   maxWidth: '100%',
                   maxHeight: 200,
                   objectFit: 'contain',
-                  borderRadius: theme.shape.borderRadius
+                  borderRadius: 8
                 }}
               />
             </Stack>
@@ -124,7 +118,7 @@ const AddLog = () => {
           bottom: 0,
           left: 0,
           right: 0,
-          padding: theme.spacing(isMobile ? 1.5 : 2),
+          padding: 2,
           backgroundColor: 'background.paper',
           borderTop: 1,
           borderColor: 'divider'
@@ -134,7 +128,6 @@ const AddLog = () => {
           variant="contained"
           onClick={handleSubmit}
           fullWidth
-          size={isMobile ? 'medium' : 'large'}
           disabled={!tags.trim() || !selectedImage}
         >
           Submit
