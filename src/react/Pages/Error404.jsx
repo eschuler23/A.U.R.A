@@ -6,7 +6,7 @@ import Gif404 from '../../assets/404.gif'
 const Error404 = () => (
   <Stack flex="1 1 auto" justifyContent="center" alignItems="center">
     <Typography variant="h5" color="error">
-      U shall not pass
+      Error 404
     </Typography>
     <img src={Gif404} alt="U Shall not Pass Meme" />
   </Stack>

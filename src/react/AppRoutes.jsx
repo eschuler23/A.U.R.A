@@ -27,7 +27,7 @@ const AppRoutes = () => (
         <Route path="/" element={<Calendar />} />
         <Route path="/add-log" element={<AddLog />} />
         <Route path="/log-result" element={<LogResult />} />
-        <Route path="*" element={<Error404 />} />
+        <Route path="/*" element={<Error404 />} />
       </Routes>
     </Stack>
   </Stack>
