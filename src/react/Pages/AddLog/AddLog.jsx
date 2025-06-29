@@ -15,12 +15,20 @@ import {
   Image as ImageIcon
 } from '@mui/icons-material'
 
+// ✅ NEU: Import für Datumsauswahl (DatePicker)
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+
 const AddLog = () => {
   const navigate = useNavigate()
   const [tags, setTags] = useState('')
   const [selectedImage, setSelectedImage] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+
+  // ✅ NEU: State für das gewählte Datum
+  const [selectedDate, setSelectedDate] = useState(null)
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -46,13 +54,31 @@ const AddLog = () => {
     handleMenuClose()
   }
 
-  const handleSubmit = () => {
-    navigate('/log-result', {
-      state: {
-        tags,
-        imageUrl: selectedImage ? URL.createObjectURL(selectedImage) : null
+  const handleSubmit = async () => {
+    const log = {
+      tags,
+      date: selectedDate,
+      imageUrl: selectedImage ? URL.createObjectURL(selectedImage) : null
+    }
+
+    try {
+      const response = await fetch('http://localhost:3001/logs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(log)
+      })
+
+      if (!response.ok) {
+        throw new Error(`Serverfehler: ${response.statusText}`)
       }
-    })
+
+      navigate('/log-result', { state: log })
+    } catch (error) {
+      console.error('Fehler beim Speichern des Logs:', error)
+      alert('Speichern fehlgeschlagen. Bitte versuche es erneut.')
+    }
   }
 
   return (
@@ -74,6 +100,17 @@ const AddLog = () => {
         }}
       >
         <Stack spacing={3}>
+
+          {/* ✅ NEU: Datumsauswahl-Komponente */}
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Select Date"
+              value={selectedDate}
+              onChange={(newValue) => setSelectedDate(newValue)}
+              slotProps={{ textField: { fullWidth: true } }}
+            />
+          </LocalizationProvider>
+
           <TextField
             label="Tags"
             value={tags}
@@ -95,6 +132,7 @@ const AddLog = () => {
             <Stack spacing={1} alignItems="center">
               <Typography variant="body2" color="textSecondary">
                 Selected:
+                <br />
                 {selectedImage.name}
               </Typography>
               <img
