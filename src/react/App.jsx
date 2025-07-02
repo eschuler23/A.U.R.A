@@ -10,6 +10,26 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppLayout from './AppLayout'
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d7d0ff',
+      dark: '#b0a7e0',
+      light: '#ebe7ff',
+    },
+    secondary: {
+      main: '#FFFFF0',
+    },
+    background: {
+      default: '#f5f4fb',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#676775',
+    },
+  },
+  typography: {
+    fontFamily: 'Arial, sans-serif',
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: defaultTheme => ({
@@ -27,6 +47,19 @@ const theme = createTheme({
           height: '100%'
         }
       })
+    },
+    MuiButton: {
+      defaultProps: {
+        size: 'small',
+        variant: 'contained',
+        fullWidth: false,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 15,
+          textTransform: 'none',
+        },
+      }
     }
   }
 })
