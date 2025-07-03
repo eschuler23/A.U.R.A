@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Stack, Button, Typography, Box } from '@mui/material'
 
-const LogResult = () => {
+const LogView = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { tags, imageUrl } = location.state || {}
@@ -78,4 +78,4 @@ const LogResult = () => {
   )
 }
 
-export default LogResult
+export default LogView

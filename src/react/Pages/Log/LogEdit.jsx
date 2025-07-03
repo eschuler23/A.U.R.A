@@ -3,21 +3,24 @@ import { useNavigate } from 'react-router-dom'
 import {
   Stack,
   Button,
-  TextField,
-  Typography,
   Menu,
   MenuItem,
-  Box
 } from '@mui/material'
 import {
   PhotoCamera as CameraIcon,
   Upload as UploadIcon,
-  Image as ImageIcon
 } from '@mui/icons-material'
+import dischargeAttributes from '../../data/dischargeAttributes'
+import InfoCard from '../../Components/InfoCard'
 
 const LogEdit = () => {
   const navigate = useNavigate()
-  const [tags, setTags] = useState('')
+  const [selectedOptions, setSelectedOptions] = useState({
+    color: [],
+    odor: [],
+    consistency: [],
+    symptom: []
+  })
   const [selectedImage, setSelectedImage] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -46,97 +49,76 @@ const LogEdit = () => {
     handleMenuClose()
   }
 
-  const handleSubmit = () => {
-    navigate('/log-result', {
-      state: {
-        tags,
-        imageUrl: selectedImage ? URL.createObjectURL(selectedImage) : null
+  const handleChipClick = (attribute, selectedOption) => {
+    setSelectedOptions((prev) => {
+      const current = prev[attribute] || []
+      const updated = current.includes(selectedOption)
+        ? current.filter((i) => i !== selectedOption)
+        : [...current, selectedOption]
+
+      return {
+        ...prev,
+        [attribute]: updated,
       }
     })
   }
 
+const handleSubmit = async () => {
+    navigate(`/log/1`);
+//   try {
+//     TBD API call
+//     const id = response.id;
+//     navigate(`/log/${id}`);
+//   } catch (error) {
+//     TBD error handling
+//   }
+};
+
   return (
     <Stack
-      spacing={0}
+      spacing={2}
       sx={{
-        width: '100%',
-        height: '100%',
-        position: 'relative',
-        overflow: 'hidden'
+        padding: 3,
+        overflow: 'auto',
       }}
     >
-      <Box
-        sx={{
-          flex: 1,
-          overflowY: 'auto',
-          padding: 3,
-          paddingBottom: '80px'
-        }}
+      {selectedImage && (
+        <img
+          src={URL.createObjectURL(selectedImage)}
+          alt="Preview"
+          style={{
+            maxWidth: '100%',
+            maxHeight: 200,
+            objectFit: 'contain',
+            borderRadius: 8
+          }}
+        />
+      )}
+      <Button onClick={handleMenuClick}>
+        {selectedImage ? 'Change Image' : 'Add Image'}
+      </Button>
+      {dischargeAttributes.map(({ key, title, icon: IconComponent, options }) => (
+        <InfoCard
+          key={key}
+          title={title}
+          options={options}
+          selectedOptions={selectedOptions[key]}
+          onClickChip={(option) => handleChipClick(key, option)}
+          icon={<IconComponent />}
+        />
+      ))}
+
+      <Button
+        onClick={handleSubmit}
+        disabled={!selectedImage || Object.values(selectedOptions).every(arr => arr.length === 0)}
       >
-        <Stack spacing={3}>
-          <TextField
-            label="Tags"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            fullWidth
-            placeholder="Enter tags separated by commas"
-          />
-
-          <Button
-            variant="contained"
-            onClick={handleMenuClick}
-            fullWidth
-            startIcon={<ImageIcon />}
-          >
-            {selectedImage ? 'Change Image' : 'Add Image'}
-          </Button>
-
-          {selectedImage && (
-            <Stack spacing={1} alignItems="center">
-              <Typography variant="body2" color="textSecondary">
-                Selected:
-                {selectedImage.name}
-              </Typography>
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="Preview"
-                style={{
-                  maxWidth: '100%',
-                  maxHeight: 200,
-                  objectFit: 'contain',
-                  borderRadius: 8
-                }}
-              />
-            </Stack>
-          )}
-        </Stack>
-      </Box>
-
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: 2,
-          backgroundColor: 'background.paper',
-          borderTop: 1,
-          borderColor: 'divider'
-        }}
-      >
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          fullWidth
-          disabled={!tags.trim() || !selectedImage}
-        >
-          Submit
-        </Button>
-      </Box>
+        Submit
+      </Button>
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
         <MenuItem component="div">
           <Button
+            variant="text"
             component="label"
             startIcon={<CameraIcon />}
             sx={{ justifyContent: 'flex-start', minWidth: '200px' }}
@@ -154,6 +136,7 @@ const LogEdit = () => {
         </MenuItem>
         <MenuItem component="div">
           <Button
+            variant="text"
             component="label"
             startIcon={<UploadIcon />}
             sx={{ justifyContent: 'flex-start', minWidth: '200px' }}
