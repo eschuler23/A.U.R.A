@@ -5,7 +5,6 @@ import Calendar from './Pages/Calendar/Calendar'
 import LogEdit from './Pages/Log/LogEdit'
 import LogView from './Pages/Log/LogView'
 import Error404 from './Pages/Error404'
-import Navbar from './Components/Navbar'
 
 const AppRoutes = () => (
   <Routes>
