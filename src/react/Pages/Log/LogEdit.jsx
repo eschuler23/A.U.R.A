@@ -10,7 +10,7 @@ import {
   PhotoCamera as CameraIcon,
   Upload as UploadIcon,
 } from '@mui/icons-material'
-import dischargeAttributes from '../../data/dischargeAttributes'
+import dischargeAttributes from '../../constants/dischargeAttributes'
 import InfoCard from '../../Components/InfoCard'
 
 const LogEdit = () => {
