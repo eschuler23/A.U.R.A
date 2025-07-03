@@ -33,6 +33,11 @@ const theme = createTheme({
 })
 
 const finalTheme = createTheme(theme, {
+  palette: {
+    primary: {
+      contrastText: theme.palette.text.primary,
+    }
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: defaultTheme => ({
