@@ -21,15 +21,18 @@ const theme = createTheme({
     },
     background: {
       default: '#f5f4fb',
-      paper: '#ffffff',
     },
     text: {
-      primary: '#676775',
+      primary: '#50505f',
+      secondary: '#676775',
     },
   },
   typography: {
     fontFamily: 'Arial, sans-serif',
-  },
+  }
+})
+
+const finalTheme = createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: defaultTheme => ({
@@ -60,14 +63,35 @@ const theme = createTheme({
           textTransform: 'none',
         },
       }
-    }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 15,
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: theme.palette.text.primary,
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: theme.palette.text.secondary,
+        },
+      },
+    },
   }
-})
+});
 
 const container = document.getElementById('app')
 const root = createRoot(container)
 root.render(
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={finalTheme}>
     <CssBaseline />
     <Router>
       <AppLayout />
