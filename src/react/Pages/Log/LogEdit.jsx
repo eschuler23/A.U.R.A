@@ -15,7 +15,7 @@ import {
   Image as ImageIcon
 } from '@mui/icons-material'
 
-const AddLog = () => {
+const LogEdit = ({ day }) => {
   const navigate = useNavigate()
   const [tags, setTags] = useState('')
   const [selectedImage, setSelectedImage] = useState(null)
@@ -173,4 +173,4 @@ const AddLog = () => {
   )
 }
 
-export default AddLog
+export default LogEdit

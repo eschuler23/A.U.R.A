@@ -18,9 +18,7 @@ const Calendar = () => {
       }}
     >
       <Button
-        variant="contained"
-        startIcon={<AddIcon />}
-        onClick={() => navigate('/add-log')}
+        onClick={() => navigate('/log/new')}
         sx={{
           minWidth: '200px'
         }}
