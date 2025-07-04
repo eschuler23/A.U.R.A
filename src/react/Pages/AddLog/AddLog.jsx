@@ -27,7 +27,7 @@ const AddLog = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
-  // ✅ NEU: State für das gewählte Datum
+  // State für das gewählte Datum
   const [selectedDate, setSelectedDate] = useState(null)
 
   const handleMenuClick = (event) => {
@@ -101,7 +101,7 @@ const AddLog = () => {
       >
         <Stack spacing={3}>
 
-          {/* ✅ NEU: Datumsauswahl-Komponente */}
+          {}
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Select Date"
