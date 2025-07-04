@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
-import { Add as AddIcon } from '@mui/icons-material'
 
 const Calendar = () => {
   const navigate = useNavigate()

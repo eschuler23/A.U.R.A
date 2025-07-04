@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  Stack,
-  Button,
-  Menu,
-  MenuItem,
-} from '@mui/material'
+import { Stack, Button, Menu, MenuItem } from '@mui/material'
 import {
   PhotoCamera as CameraIcon,
-  Upload as UploadIcon,
+  Upload as UploadIcon
 } from '@mui/icons-material'
 import dischargeAttributes from '../../constants/dischargeAttributes'
 import InfoCard from '../../Components/InfoCard'
@@ -58,28 +53,28 @@ const LogEdit = () => {
 
       return {
         ...prev,
-        [attribute]: updated,
+        [attribute]: updated
       }
     })
   }
 
-const handleSubmit = async () => {
-    navigate(`/log/1`);
-//   try {
-//     TBD API call
-//     const id = response.id;
-//     navigate(`/log/${id}`);
-//   } catch (error) {
-//     TBD error handling
-//   }
-};
+  const handleSubmit = async () => {
+    navigate('/log/1')
+    //   try {
+    //     TBD API call
+    //     const id = response.id;
+    //     navigate(`/log/${id}`);
+    //   } catch (error) {
+    //     TBD error handling
+    //   }
+  }
 
   return (
     <Stack
       spacing={2}
       sx={{
         padding: 3,
-        overflow: 'auto',
+        overflow: 'auto'
       }}
     >
       {selectedImage && (
@@ -97,20 +92,25 @@ const handleSubmit = async () => {
       <Button onClick={handleMenuClick}>
         {selectedImage ? 'Change Image' : 'Add Image'}
       </Button>
-      {dischargeAttributes.map(({ key, title, icon: IconComponent, options }) => (
-        <InfoCard
-          key={key}
-          title={title}
-          options={options}
-          selectedOptions={selectedOptions[key]}
-          onClickChip={(option) => handleChipClick(key, option)}
-          icon={<IconComponent />}
-        />
-      ))}
+      {dischargeAttributes.map(
+        ({ key, title, icon: IconComponent, options }) => (
+          <InfoCard
+            key={key}
+            title={title}
+            options={options}
+            selectedOptions={selectedOptions[key]}
+            onClickChip={(option) => handleChipClick(key, option)}
+            icon={<IconComponent />}
+          />
+        )
+      )}
 
       <Button
         onClick={handleSubmit}
-        disabled={!selectedImage || Object.values(selectedOptions).every(arr => arr.length === 0)}
+        disabled={
+          !selectedImage ||
+          Object.values(selectedOptions).every((arr) => arr.length === 0)
+        }
       >
         Submit
       </Button>

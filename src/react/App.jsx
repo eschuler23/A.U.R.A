@@ -14,44 +14,44 @@ const theme = createTheme({
     primary: {
       main: '#d7d0ff',
       dark: '#b0a7e0',
-      light: '#ebe7ff',
+      light: '#ebe7ff'
     },
     secondary: {
-      main: '#FFFFF0',
+      main: '#FFFFF0'
     },
     background: {
-      default: '#f5f4fb',
+      default: '#f5f4fb'
     },
     text: {
       primary: '#50505f',
-      secondary: '#676775',
-    },
+      secondary: '#676775'
+    }
   },
   typography: {
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'Arial, sans-serif'
   }
 })
 
 const finalTheme = createTheme(theme, {
   palette: {
     primary: {
-      contrastText: theme.palette.text.primary,
+      contrastText: theme.palette.text.primary
     }
   },
   components: {
     MuiCssBaseline: {
-      styleOverrides: defaultTheme => ({
-       html: {
-         width: '100%',
-         height: '100%'
-       },
-       body: {
-         width: '100%',
-         height: '100%',
-         background: defaultTheme.palette.grey[200]
-       },
-       '#app': {
-         width: '100%',
+      styleOverrides: (defaultTheme) => ({
+        html: {
+          width: '100%',
+          height: '100%'
+        },
+        body: {
+          width: '100%',
+          height: '100%',
+          background: defaultTheme.palette.grey[200]
+        },
+        '#app': {
+          width: '100%',
           height: '100%'
         }
       })
@@ -60,38 +60,38 @@ const finalTheme = createTheme(theme, {
       defaultProps: {
         size: 'small',
         variant: 'contained',
-        fullWidth: false,
+        fullWidth: false
       },
       styleOverrides: {
         root: {
           borderRadius: 15,
-          textTransform: 'none',
-        },
+          textTransform: 'none'
+        }
       }
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 15,
+          borderRadius: 15
         }
       }
     },
     MuiTypography: {
       styleOverrides: {
         root: {
-          color: theme.palette.text.primary,
-        },
-      },
+          color: theme.palette.text.primary
+        }
+      }
     },
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: theme.palette.text.secondary,
-        },
-      },
-    },
+          color: theme.palette.text.secondary
+        }
+      }
+    }
   }
-});
+})
 
 const container = document.getElementById('app')
 const root = createRoot(container)

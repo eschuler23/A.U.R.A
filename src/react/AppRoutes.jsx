@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Stack } from '@mui/material'
 import Calendar from './Pages/Calendar/Calendar'
 import LogEdit from './Pages/Log/LogEdit'
 import LogView from './Pages/Log/LogView'
