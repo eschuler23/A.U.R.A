@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -212,3 +213,5 @@ const AddLog = () => {
 }
 
 export default AddLog
+=======
+>>>>>>> origin/main

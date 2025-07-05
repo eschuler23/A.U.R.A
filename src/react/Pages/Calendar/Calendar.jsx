@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
+<<<<<<< HEAD
 import { Add as AddIcon } from '@mui/icons-material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { PickersDay } from '@mui/x-date-pickers/PickersDay'
+=======
+>>>>>>> origin/main
 
 const Calendar = () => {
   const navigate = useNavigate()
@@ -70,9 +73,7 @@ const Calendar = () => {
       </LocalizationProvider>
 
       <Button
-        variant="contained"
-        startIcon={<AddIcon />}
-        onClick={() => navigate('/add-log')}
+        onClick={() => navigate('/log/new')}
         sx={{
           minWidth: '200px'
         }}

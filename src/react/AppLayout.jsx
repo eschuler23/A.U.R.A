@@ -3,6 +3,7 @@ import { Stack, Typography, Container, Paper } from '@mui/material'
 
 import AppRoutes from './AppRoutes'
 import AppLogo from '../assets/favicon.svg'
+import Navbar from './Components/Navbar'
 
 const borderRadius = 6
 
@@ -65,6 +66,7 @@ const AppLayout = () => (
             background: '#ffffff'
           }}
         >
+          <Navbar />
           <AppRoutes />
         </Stack>
       </Paper>

@@ -15,17 +15,17 @@ const Navbar = () => {
           showBackButton: false,
           backPath: null
         }
-      case '/add-log':
+      case '/log/new':
         return {
-          title: 'New Log',
+          title: 'Create new log', // TBD Datum übergeben
           showBackButton: true,
           backPath: '/'
         }
-      case '/log-result':
+      case '/log': // TBD id übergeben
         return {
-          title: 'Log Result',
+          title: '',
           showBackButton: true,
-          backPath: '/add-log'
+          backPath: '/'
         }
       default:
         return {
