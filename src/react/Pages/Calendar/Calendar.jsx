@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
-<<<<<<< HEAD
 import { Add as AddIcon } from '@mui/icons-material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { PickersDay } from '@mui/x-date-pickers/PickersDay'
-=======
->>>>>>> origin/main
 
 const Calendar = () => {
   const navigate = useNavigate()
@@ -65,7 +62,7 @@ const Calendar = () => {
               (log) => new Date(log.date).toDateString() === date.toDateString()
             )
             if (selectedLog) {
-              navigate('/log-result', { state: selectedLog })
+              navigate('/log/1', { state: selectedLog })
             }
           }}
           renderDay={renderDay}
@@ -74,11 +71,9 @@ const Calendar = () => {
 
       <Button
         onClick={() => navigate('/log/new')}
-        sx={{
-          minWidth: '200px'
-        }}
+        sx={{ minWidth: '35px' }}
       >
-        Add Log
+        +
       </Button>
     </Stack>
   )

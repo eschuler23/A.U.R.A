@@ -7,6 +7,9 @@ import {
 } from '@mui/icons-material'
 import dischargeAttributes from '../../Constants/dischargeAttributes'
 import InfoCard from '../../Components/InfoCard'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 const LogEdit = () => {
   const navigate = useNavigate()
@@ -17,6 +20,7 @@ const LogEdit = () => {
     symptom: []
   })
   const [selectedImage, setSelectedImage] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
@@ -59,14 +63,30 @@ const LogEdit = () => {
   }
 
   const handleSubmit = async () => {
-    navigate('/log/1')
-    //   try {
-    //     TBD API call
-    //     const id = response.id;
-    //     navigate(`/log/${id}`);
-    //   } catch (error) {
-    //     TBD error handling
-    //   }
+    const log = {
+      selectedOptions,
+      date: selectedDate,
+      imageUrl: selectedImage ? URL.createObjectURL(selectedImage) : null
+    }
+
+    try {
+      const response = await fetch('http://localhost:3001/logs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(log)
+      })
+
+      if (!response.ok) {
+        throw new Error(`Serverfehler: ${response.statusText}`)
+      }
+
+      navigate('/log/1', { state: log })
+    } catch (error) {
+      console.error('Fehler beim Speichern des Logs:', error)
+      alert('Speichern fehlgeschlagen. Bitte versuche es erneut.')
+    }
   }
 
   return (
@@ -77,6 +97,14 @@ const LogEdit = () => {
         overflow: 'auto'
       }}
     >
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker
+          label="Select Date"
+          value={selectedDate}
+          onChange={(newValue) => setSelectedDate(newValue)}
+          slotProps={{ textField: { fullWidth: true } }}
+        />
+      </LocalizationProvider>
       {selectedImage && (
         <img
           src={URL.createObjectURL(selectedImage)}
@@ -109,6 +137,7 @@ const LogEdit = () => {
         onClick={handleSubmit}
         disabled={
           !selectedImage ||
+          !selectedDate ||
           Object.values(selectedOptions).every((arr) => arr.length === 0)
         }
       >
