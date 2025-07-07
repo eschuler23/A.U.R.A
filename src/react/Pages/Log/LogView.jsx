@@ -5,7 +5,7 @@ import { Stack, Button, Typography, Box } from '@mui/material'
 const LogView = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { tags, imageUrl } = location.state || {}
+  const { selectedOptions, date, imageUrl } = location.state || {}
 
   return (
     <Stack
@@ -26,10 +26,19 @@ const LogView = () => {
         }}
       >
         <Stack spacing={3}>
-          {tags && (
+          {selectedOptions && (
             <Box>
-              <Typography variant="h6">Tags:</Typography>
-              <Typography>{tags}</Typography>
+              <Typography variant="h6">Selected Options:</Typography>
+              <pre style={{ whiteSpace: 'pre-wrap' }}>
+                {JSON.stringify(selectedOptions, null, 2)}
+              </pre>
+            </Box>
+          )}
+
+          {date && (
+            <Box>
+              <Typography variant="h6">Date:</Typography>
+              <Typography>{new Date(date).toLocaleDateString()}</Typography>
             </Box>
           )}
 
