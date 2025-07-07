@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
-import { Add as AddIcon } from '@mui/icons-material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -14,9 +13,9 @@ const Calendar = () => {
 
   useEffect(() => {
     fetch('http://localhost:3001/logs')
-      .then(res => res.json())
-      .then(data => setLogs(data))
-      .catch(err => console.error('Fehler beim Laden der Logs:', err))
+      .then((res) => res.json())
+      .then((data) => setLogs(data))
+      .catch((err) => console.error('Fehler beim Laden der Logs:', err))
   }, [])
 
   const renderDay = (day, _value, DayComponentProps) => {
@@ -69,10 +68,7 @@ const Calendar = () => {
         />
       </LocalizationProvider>
 
-      <Button
-        onClick={() => navigate('/log/new')}
-        sx={{ minWidth: '35px' }}
-      >
+      <Button onClick={() => navigate('/log/new')} sx={{ minWidth: '35px' }}>
         +
       </Button>
     </Stack>
