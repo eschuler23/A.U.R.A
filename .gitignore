@@ -12,11 +12,9 @@ releases
 .env
 package-lock.json
 build/**
-data
 out
 forge.tmp.json
 forge-bundle
 maps-data
 .firebase
-.yarn
 functions/static/**
