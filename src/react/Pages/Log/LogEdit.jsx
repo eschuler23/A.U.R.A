@@ -85,6 +85,7 @@ const LogEdit = () => {
       navigate('/log/1', { state: log })
     } catch (error) {
       console.error('Fehler beim Speichern des Logs:', error)
+      // eslint-disable-next-line no-alert
       alert('Speichern fehlgeschlagen. Bitte versuche es erneut.')
     }
   }
