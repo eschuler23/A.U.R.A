@@ -12,10 +12,12 @@ We aim to help people with uterus to better understand their intimate health - t
 2. run yarn install in the Terminal
 
 Start the frontend 
+
 3. in one Terminal: yarn watch
 4. in a second Terminal: yarn start
 
 Start the server
+
 5. cd express-backend
 6. yarn install
 7. node server.js 
