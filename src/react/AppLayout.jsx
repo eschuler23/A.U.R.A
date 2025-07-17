@@ -1,7 +1,6 @@
 import React from 'react'
 import { Stack, Typography, Container, Paper } from '@mui/material'
-
-import AppRoutes from './AppRoutes'
+import { Outlet } from 'react-router-dom'
 import AppLogo from '../assets/favicon.svg'
 import Navbar from './Components/Navbar'
 
@@ -63,11 +62,11 @@ const AppLayout = () => (
           sx={{
             overflow: 'hidden',
             borderRadius,
-            background: '#ffffff'
+            backgroundColor: 'background.default'
           }}
         >
           <Navbar />
-          <AppRoutes />
+          <Outlet />
         </Stack>
       </Paper>
     </Container>

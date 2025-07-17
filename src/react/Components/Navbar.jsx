@@ -1,11 +1,13 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material'
-import { ArrowBack as ArrowBackIcon } from '@mui/icons-material'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined'
 
 const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { date } = useParams()
 
   const getPageConfig = () => {
     switch (location.pathname) {
@@ -13,30 +15,42 @@ const Navbar = () => {
         return {
           title: 'Calendar',
           showBackButton: false,
+          showEditButton: false,
           backPath: null
         }
       case '/log/new':
         return {
-          title: 'Create new log', // TBD Datum übergeben
+          title: 'New Entry',
           showBackButton: true,
+          showEditButton: false,
           backPath: '/'
         }
-      case '/log': // TBD id übergeben
+      case `/log/edit/${date}`:
         return {
-          title: '',
+          title: 'Edit entry',
           showBackButton: true,
-          backPath: '/'
+          showEditButton: false,
+          backPath: `/log/${date}`
+        }
+      case `/log/${date}`:
+        return {
+          title: `${date}`,
+          showBackButton: true,
+          showEditButton: true,
+          backPath: '/',
+          editPath: `/log/edit/${date}`
         }
       default:
         return {
           title: 'Calendar',
           showBackButton: false,
+          showEditButton: false,
           backPath: null
         }
     }
   }
 
-  const { title, showBackButton, backPath } = getPageConfig()
+  const { title, showBackButton, showEditButton, backPath, editPath } = getPageConfig()
 
   const handleBackClick = () => {
     if (backPath) {
@@ -44,56 +58,43 @@ const Navbar = () => {
     }
   }
 
+  const handleEditClick = () => {
+    if (editPath) {
+      navigate(editPath, { state: location.state })
+    }
+  }
+
   return (
     <AppBar
+      color="secondary"
       position="static"
-      color="primary"
-      elevation={1}
-      sx={{
-        borderRadius: 0,
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8
-      }}
+      elevation={0}
+      sx={{ borderRadius: 0 }}
     >
-      <Toolbar
-        sx={{
-          justifyContent: 'space-between',
-          minHeight: '64px',
-          paddingX: 1
-        }}
-      >
-        <div
-          style={{
-            width: '48px',
-            display: 'flex',
-            justifyContent: 'flex-start'
-          }}
+      <Toolbar>
+        <IconButton
+          size="small"
+          onClick={handleBackClick}
+          sx={{ visibility: showBackButton ? undefined : 'hidden' }}
         >
-          {showBackButton && (
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleBackClick}
-              sx={{ padding: 1 }}
-            >
-              <ArrowBackIcon />
-            </IconButton>
-          )}
-        </div>
-
+          <ArrowBackIosNewIcon />
+        </IconButton>
         <Typography
-          variant="h5"
-          component="h1"
+          variant="subtitle1"
           sx={{
-            fontWeight: 'medium',
-            textAlign: 'center',
-            flex: 1
+            flexGrow: 1,
+            textAlign: 'center'
           }}
         >
           {title}
         </Typography>
-
-        <div style={{ width: '48px' }} />
+        <IconButton
+          size="small"
+          onClick={handleEditClick}
+          sx={{ visibility: showEditButton ? undefined : 'hidden' }}
+        >
+          <EditCalendarOutlinedIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   )
