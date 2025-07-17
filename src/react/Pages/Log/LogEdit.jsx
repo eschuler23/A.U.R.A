@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Stack, Button, Menu, MenuItem } from '@mui/material'
 import {
   PhotoCamera as CameraIcon,
@@ -23,6 +23,32 @@ const LogEdit = () => {
   const [selectedDate, setSelectedDate] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+  const { date } = useParams()
+
+  useEffect(() => {
+    if (!date) return
+
+    const fetchLog = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/logs')
+        const logs = await response.json()
+
+        const foundLog = logs.find(
+          (log) => log.date === date
+        )
+
+        if (foundLog) {
+          setSelectedOptions(foundLog.selectedOptions)
+          setSelectedImage(foundLog.imageUrl)
+          setSelectedDate(new Date(foundLog.date))
+        }
+      } catch (error) {
+        console.error('Fehler beim Laden des Logs:', error)
+      }
+    }
+
+    fetchLog()
+  }, [date])
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -35,7 +61,7 @@ const LogEdit = () => {
   const handleImageChange = (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedImage(file)
+      setSelectedImage(URL.createObjectURL(file))
     }
     handleMenuClose()
   }
@@ -43,7 +69,7 @@ const LogEdit = () => {
   const handleCameraCapture = (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedImage(file)
+      setSelectedImage(URL.createObjectURL(file))
     }
     handleMenuClose()
   }
@@ -65,11 +91,24 @@ const LogEdit = () => {
   const handleSubmit = async () => {
     const log = {
       selectedOptions,
-      date: selectedDate,
-      imageUrl: selectedImage ? URL.createObjectURL(selectedImage) : null
+      date: selectedDate.toISOString().split('T')[0],
+      imageUrl: selectedImage
     }
 
     try {
+      if (date) {
+        const res = await fetch('http://localhost:3001/logs')
+        const logs = await res.json()
+        const existingLog = logs.find((l) => l.date === date)
+
+        if (existingLog) {
+          //          TODO BACKEND MAHIR
+          //          await fetch(`http://localhost:3001/logs/${existingLog.key}`, {
+          //            method: 'DELETE'
+          //          })
+        }
+      }
+
       const response = await fetch('http://localhost:3001/logs', {
         method: 'POST',
         headers: {
@@ -82,7 +121,7 @@ const LogEdit = () => {
         throw new Error(`Serverfehler: ${response.statusText}`)
       }
 
-      navigate(`/log/${selectedDate.toISOString().split('T')[0]}`, { state: log })
+      navigate(`/log/${selectedDate.toISOString().split('T')[0]}`)
     } catch (error) {
       console.error('Fehler beim Speichern des Logs:', error)
       // eslint-disable-next-line no-alert
@@ -103,16 +142,17 @@ const LogEdit = () => {
           label="Select Date"
           value={selectedDate}
           onChange={(newValue) => setSelectedDate(newValue)}
+          disabled={!!date}
         />
       </LocalizationProvider>
       {selectedImage && (
         <img
-          src={URL.createObjectURL(selectedImage)}
+          src={selectedImage}
           alt="Preview"
           style={{
             maxWidth: '100%',
             maxHeight: 200,
-            objectFit: 'contain',
+            objectFit: 'contain'
           }}
         />
       )}

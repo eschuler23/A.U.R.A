@@ -61,7 +61,7 @@ const Calendar = () => {
               (log) => new Date(log.date).toDateString() === date.toDateString()
             )
             if (selectedLog) {
-              navigate('/log/1', { state: selectedLog })
+              navigate(`/log/${selectedLog.date}`)
             }
           }}
           renderDay={renderDay}
