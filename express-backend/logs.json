@@ -1,10 +1,5 @@
 [
   {
-    "tags": "Tests",
-    "date": "2025-07-01T22:00:00.000Z",
-    "imageUrl": "blob:http://141.45.42.236:8000/7c1c437c-84f6-44b3-be4e-d4e4f500c3be"
-  },
-  {
     "selectedOptions": {
       "color": [
         "White (clear to milky)"
@@ -19,7 +14,7 @@
         "Shortly before/after period"
       ]
     },
-    "date": "2025-07-10T22:00:00.000Z",
+    "date": "2025-07-10",
     "imageUrl": "blob:http://192.168.178.117:8000/f3ab1a87-a7a0-4e41-8960-abc8cc5a753c"
   },
   {
@@ -37,7 +32,7 @@
         "Vulvar itching, dyspareunia, dysuria, discomfort, vulvitis and vaginitis"
       ]
     },
-    "date": "2025-07-27T22:00:00.000Z",
+    "date": "2025-07-27",
     "imageUrl": "blob:http://192.168.178.117:8000/7f50df5e-7bff-45d8-908d-56c5d24a6be5"
   }
 ]
