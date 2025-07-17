@@ -1,13 +1,37 @@
-import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { Stack, Button, Typography, Box } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Stack, Box } from '@mui/material'
 import InfoCard from '../../Components/InfoCard'
 import dischargeAttributes from '../../Constants/dischargeAttributes'
 
 const LogView = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { selectedOptions, date, imageUrl } = location.state || {}
+  const [options, setOptions] = useState(null)
+  const [image, setImage] = useState(null)
+  const { date } = useParams()
+
+  useEffect(() => {
+    if (!date) return
+
+    const fetchLog = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/logs')
+        const logs = await response.json()
+
+        const foundLog = logs.find(
+          (log) => log.date === date
+        )
+
+        if (foundLog) {
+          setOptions(foundLog.selectedOptions)
+          setImage(foundLog.imageUrl)
+        }
+      } catch (error) {
+        console.error('Fehler beim Laden des Logs:', error)
+      }
+    }
+
+    fetchLog()
+  }, [date])
 
   return (
     <Stack
@@ -17,28 +41,31 @@ const LogView = () => {
         overflow: 'auto'
       }}
     >
-      {imageUrl && (
+      {image && (
         <Box
           component="img"
-          src={imageUrl}
+          src={image}
           alt="Uploaded"
           sx={{
             width: '100%',
             maxHeight: 300,
-            objectFit: 'contain',
+            objectFit: 'contain'
           }}
         />
       )}
-      {selectedOptions && Object.entries(selectedOptions).map(
-        ([title, options]) => (
+      {options && Object.entries(options).map(([title, opt]) => {
+        const attribute = dischargeAttributes.find(attr => attr.key === title)
+
+        return (
           <InfoCard
-            key={dischargeAttributes.find((attr => attr.key === title)).key}
-            title={dischargeAttributes.find((attr => attr.key === title)).title}
-            options={options}
-            selectedOptions={options}
+            key={attribute.key}
+            title={attribute.title}
+            options={opt}
+            selectedOptions={opt}
+            icon={<attribute.icon />}
           />
         )
-      )}
+      })}
     </Stack>
   )
 }

@@ -9,7 +9,7 @@ const InfoCard = ({
   options = [],
   selectedOptions = [],
   onClickChip = () => {},
-  clickable = false,
+  clickable = false
 }) => (options.length > 0 &&
   <Card sx={{ flexShrink: 0 }}>
     <CardHeader
@@ -54,7 +54,8 @@ InfoCard.propTypes = {
   icon: PropTypes.node,
   options: PropTypes.arrayOf(PropTypes.string),
   selectedOptions: PropTypes.arrayOf(PropTypes.string),
-  onClickChip: PropTypes.func
+  onClickChip: PropTypes.func,
+  clickable: PropTypes.bool
 }
 
 export default InfoCard
