@@ -82,7 +82,7 @@ const LogEdit = () => {
         throw new Error(`Serverfehler: ${response.statusText}`)
       }
 
-      navigate('/log/1', { state: log })
+      navigate(`/log/${selectedDate.toISOString().split('T')[0]}`, { state: log })
     } catch (error) {
       console.error('Fehler beim Speichern des Logs:', error)
       // eslint-disable-next-line no-alert
@@ -103,7 +103,6 @@ const LogEdit = () => {
           label="Select Date"
           value={selectedDate}
           onChange={(newValue) => setSelectedDate(newValue)}
-          slotProps={{ textField: { fullWidth: true } }}
         />
       </LocalizationProvider>
       {selectedImage && (
@@ -114,14 +113,13 @@ const LogEdit = () => {
             maxWidth: '100%',
             maxHeight: 200,
             objectFit: 'contain',
-            borderRadius: 8
           }}
         />
       )}
       <Button onClick={handleMenuClick}>
         {selectedImage ? 'Change Image' : 'Add Image'}
       </Button>
-      {dischargeAttributes.map(
+      {dischargeAttributes && dischargeAttributes.map(
         ({ key, title, icon: IconComponent, options }) => (
           <InfoCard
             key={key}
@@ -130,6 +128,7 @@ const LogEdit = () => {
             selectedOptions={selectedOptions[key]}
             onClickChip={(option) => handleChipClick(key, option)}
             icon={<IconComponent />}
+            clickable
           />
         )
       )}
