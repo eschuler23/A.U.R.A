@@ -5,11 +5,12 @@ import InfoOutlineIcon from '@mui/icons-material/InfoOutlined'
 
 const InfoCard = ({
   title,
-  icon,
+  icon = null,
   options = [],
   selectedOptions = [],
-  onClickChip
-}) => (
+  onClickChip = () => {},
+  clickable = false,
+}) => (options.length > 0 &&
   <Card sx={{ flexShrink: 0 }}>
     <CardHeader
       avatar={icon}
@@ -29,8 +30,8 @@ const InfoCard = ({
             key={option}
             label={option}
             variant="filled"
-            clickable
-            onClick={() => onClickChip(option)}
+            clickable={clickable}
+            onClick={clickable ? () => onClickChip(option) : undefined}
             sx={{
               borderRadius: '20px',
               backgroundColor: isSelected ? 'primary.dark' : 'primary.light',
