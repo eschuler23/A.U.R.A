@@ -12,6 +12,22 @@ import InfoCard from '../../Components/InfoCard'
 import dischargeAttributes from '../../Constants/dischargeAttributes'
 
 const LogEdit = () => {
+  const uploadImage = async (file) => {
+    const namedFile = file.name
+      ? file
+      : new File([file], `photo-${Date.now()}.jpg`, { type: file.type })
+
+    const formData = new FormData()
+    formData.append('image', namedFile)
+
+    const res = await fetch('http://localhost:3001/upload', {
+      method: 'POST',
+      body: formData
+    })
+
+    const data = await res.json()
+    return data.imageUrl
+  }
   const navigate = useNavigate()
   const [selectedOptions, setSelectedOptions] = useState({
     color: [],
@@ -58,18 +74,20 @@ const LogEdit = () => {
     setAnchorEl(null)
   }
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedImage(URL.createObjectURL(file))
+      const url = await uploadImage(file)
+      setSelectedImage(url)
     }
     handleMenuClose()
   }
 
-  const handleCameraCapture = (event) => {
+  const handleCameraCapture = async (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedImage(URL.createObjectURL(file))
+      const url = await uploadImage(file)
+      setSelectedImage(url)
     }
     handleMenuClose()
   }
