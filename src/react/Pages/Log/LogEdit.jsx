@@ -163,6 +163,7 @@ const LogEdit = () => {
         ({ key, title, icon: IconComponent, options }) => (
           <InfoCard
             key={key}
+            attrKey={key}
             title={title}
             options={options}
             selectedOptions={selectedOptions[key]}
