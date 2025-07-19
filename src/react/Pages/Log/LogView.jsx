@@ -59,6 +59,7 @@ const LogView = () => {
         return (
           <InfoCard
             key={attribute.key}
+            attrKey={attribute.key}
             title={attribute.title}
             options={opt}
             selectedOptions={opt}
