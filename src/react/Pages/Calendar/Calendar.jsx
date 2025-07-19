@@ -30,10 +30,10 @@ const CustomDay = ({
       onDaySelect={onDaySelect}
       sx={{
         ...(isLogged && {
-          backgroundColor: '#d7d0ff',
+          backgroundColor: 'primary.main',
           color: 'white',
           '&:hover': {
-            backgroundColor: '#64b5f6'
+            backgroundColor: 'primary.dark'
           }
         })
       }}
