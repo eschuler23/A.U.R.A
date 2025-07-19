@@ -89,9 +89,12 @@ const LogEdit = () => {
   }
 
   const handleSubmit = async () => {
+    const year = selectedDate.getFullYear()
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+    const day = String(selectedDate.getDate()).padStart(2, '0')
     const log = {
       selectedOptions,
-      date: selectedDate.toISOString().split('T')[0],
+      date: `${year}-${month}-${day}`,
       imageUrl: selectedImage
     }
 
@@ -121,7 +124,7 @@ const LogEdit = () => {
         throw new Error(`Serverfehler: ${response.statusText}`)
       }
 
-      navigate(`/log/${selectedDate.toISOString().split('T')[0]}`)
+      navigate(`/log/${year}-${month}-${day}`)
     } catch (error) {
       console.error('Fehler beim Speichern des Logs:', error)
       // eslint-disable-next-line no-alert
