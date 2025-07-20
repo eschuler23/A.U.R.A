@@ -19,3 +19,4 @@ maps-data
 .firebase
 functions/static/**
 express-backend/.yarn/install-state.gz
+.yarn/install-state.gz
