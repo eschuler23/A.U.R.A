@@ -1,4 +1,4 @@
-const classificatoin = {
+const classification = {
   unbedenklich: [
     'White (clear to milky)',
     'Milky white',
@@ -55,4 +55,4 @@ const classificatoin = {
     '“Strawberry cervix”'
   ]
 }
-export default classificatoin
+export default classification
