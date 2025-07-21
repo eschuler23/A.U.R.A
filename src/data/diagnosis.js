@@ -6,7 +6,8 @@ const diagnoses = {
       'Creamy, slightly viscous',
       'None'
     ],
-    diagnosis: 'normal white Discharge'
+    diagnosis: 'normal white Discharge',
+    recommendation: ''
   },
   lutealPhase: {
     tags: [
@@ -16,7 +17,9 @@ const diagnoses = {
       'None'
 
     ],
-    diagnosis: 'lutheal Phase'
+    diagnosis: 'lutheal Phase',
+    recommendation: ''
+
   },
   cervicalMucusNonFertileCyclePhase: {
     tags: ['Milky white',
@@ -25,7 +28,9 @@ const diagnoses = {
       'None'
 
     ],
-    diagnosis: 'Cervical Mucus, outside ovulation'
+    diagnosis: 'Cervical Mucus, outside ovulation',
+    recommendation: ''
+
   },
   cervicalMucusFertileCyclePhaseOvulation: {
     tags: ['Clear',
@@ -34,7 +39,9 @@ const diagnoses = {
       'None'
 
     ],
-    diagnosis: 'Cervical Mucus indicating ovulation'
+    diagnosis: 'Cervical Mucus indicating ovulation',
+    recommendation: ''
+
   },
   hormonalFluctuationPossiblyOvulatoryBleeding: {
     tags: ['Pink',
@@ -45,7 +52,9 @@ const diagnoses = {
       'Atypical for cycle timing'
 
     ],
-    diagnosis: 'hormonal fluctuation, possibly ovulatory bleeding Ovulatory bleeding'
+    diagnosis: 'hormonal fluctuation, possibly ovulatory bleeding Ovulatory bleeding',
+    recommendation: ''
+
   },
   oldBloodResidueHormonalFluctuation: {
     tags: ['Brown',
@@ -54,7 +63,9 @@ const diagnoses = {
       'Shortly before/after period'
 
     ],
-    diagnosis: 'Old blood residue, hormonal fluctuation'
+    diagnosis: 'Old blood residue, hormonal fluctuation',
+    recommendation: ''
+
   },
   bacterialVaginosis: {
     tags: ['Whitish gray',
@@ -64,7 +75,9 @@ const diagnoses = {
       'Thin, lumpy'
 
     ],
-    diagnosis: 'Bacterial vaginosis'
+    diagnosis: 'Bacterial vaginosis',
+    recommendation: ''
+
   },
   chlamydia: {
     tags: [
@@ -76,7 +89,9 @@ const diagnoses = {
       'Painful urination'
 
     ],
-    diagnosis: 'Chlamydia'
+    diagnosis: 'Chlamydia',
+    recommendation: ''
+
   },
   Gonorrhoea: {
     tags: ['Greenish',
@@ -90,7 +105,9 @@ const diagnoses = {
       'Pain, fever, itching'
 
     ],
-    diagnosis: 'Gonorrhoea'
+    diagnosis: 'Gonorrhoea',
+    recommendation: ''
+
   },
   vaginalFungusCandida: {
     tags: ['White-yellowish',
@@ -100,7 +117,9 @@ const diagnoses = {
       'Itching, burning'
 
     ],
-    diagnosis: 'Vaginal fungus (Candida)'
+    diagnosis: 'Vaginal fungus (Candida)',
+    recommendation: ''
+
   },
   possibleSexuallyTransmittedDisease: {
     tags: ['Pink (not related to cycle)',
@@ -109,7 +128,9 @@ const diagnoses = {
       'Atypical for cycle timing'
 
     ],
-    diagnosis: 'Possible sexually transmitted disease'
+    diagnosis: 'Possible sexually transmitted disease',
+    recommendation: ''
+
   },
   possibleInfection: {
     tags: ['Brown (with symptoms)',
@@ -119,7 +140,9 @@ const diagnoses = {
       'Itching, irritation'
 
     ],
-    diagnosis: 'Possible infection'
+    diagnosis: 'Possible infection',
+    recommendation: ''
+
   },
   trichomonads: {
     tags: ['Yellow-green',
@@ -128,7 +151,9 @@ const diagnoses = {
       'Sparse to abundant'
 
     ],
-    diagnosis: 'Trichomonads'
+    diagnosis: 'Trichomonads',
+    recommendation: ''
+
   },
   vulvovaginalCandidiasis: {
     tags: ['White (clear to milky)',
@@ -140,7 +165,9 @@ const diagnoses = {
       'Pain during sexual intercourse',
       'discomfort vulvitis and vaginitis'
     ],
-    diagnosis: 'Vulvovaginal candidiasis'
+    diagnosis: 'Vulvovaginal candidiasis',
+    recommendation: ''
+
   }
 }
 
