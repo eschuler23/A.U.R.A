@@ -33,9 +33,7 @@ const LogEdit = () => {
         const response = await fetch('http://localhost:3001/logs')
         const logs = await response.json()
 
-        const foundLog = logs.find(
-          (log) => log.date === date
-        )
+        const foundLog = logs.find((log) => log.date === date)
 
         if (foundLog) {
           setSelectedOptions(foundLog.selectedOptions)
@@ -92,39 +90,40 @@ const LogEdit = () => {
     const year = selectedDate.getFullYear()
     const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
     const day = String(selectedDate.getDate()).padStart(2, '0')
+    const formattedDate = `${year}-${month}-${day}`
     const log = {
       selectedOptions,
-      date: `${year}-${month}-${day}`,
+      date: formattedDate,
       imageUrl: selectedImage
     }
 
     try {
+      let response
       if (date) {
-        const res = await fetch('http://localhost:3001/logs')
-        const logs = await res.json()
-        const existingLog = logs.find((l) => l.date === date)
-
-        if (existingLog) {
-          //          TODO BACKEND MAHIR
-          //          await fetch(`http://localhost:3001/logs/${existingLog.key}`, {
-          //            method: 'DELETE'
-          //          })
-        }
+        // Update existing log
+        response = await fetch(`http://localhost:3001/logs/${date}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(log)
+        })
+      } else {
+        // Create new log
+        response = await fetch('http://localhost:3001/logs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(log)
+        })
       }
-
-      const response = await fetch('http://localhost:3001/logs', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(log)
-      })
 
       if (!response.ok) {
         throw new Error(`Serverfehler: ${response.statusText}`)
       }
 
-      navigate(`/log/${year}-${month}-${day}`)
+      navigate(`/log/${formattedDate}`)
     } catch (error) {
       console.error('Fehler beim Speichern des Logs:', error)
       // eslint-disable-next-line no-alert
@@ -162,20 +161,21 @@ const LogEdit = () => {
       <Button onClick={handleMenuClick}>
         {selectedImage ? 'Change Image' : 'Add Image'}
       </Button>
-      {dischargeAttributes && dischargeAttributes.map(
-        ({ key, title, icon: IconComponent, options }) => (
-          <InfoCard
-            key={key}
-            attrKey={key}
-            title={title}
-            options={options}
-            selectedOptions={selectedOptions[key]}
-            onClickChip={(option) => handleChipClick(key, option)}
-            icon={<IconComponent />}
-            clickable
-          />
-        )
-      )}
+      {dischargeAttributes &&
+        dischargeAttributes.map(
+          ({ key, title, icon: IconComponent, options }) => (
+            <InfoCard
+              key={key}
+              attrKey={key}
+              title={title}
+              options={options}
+              selectedOptions={selectedOptions[key]}
+              onClickChip={(option) => handleChipClick(key, option)}
+              icon={<IconComponent />}
+              clickable
+            />
+          )
+        )}
 
       <Button
         onClick={handleSubmit}

@@ -34,9 +34,9 @@ const dischargeAttributes = [
       'Metallic / old blood',
       'Fishy',
       'Unpleasant',
-      'Possibly unpleasant',
       'Fishy / strong',
-      'Yeasty / sour'
+      'Yeasty / sour',
+      'Foul'
     ]
   },
   {
@@ -46,13 +46,14 @@ const dischargeAttributes = [
     options: [
       'Creamy, slightly viscous',
       'Thick',
+      'Thin',
       'Creamy, slightly viscous, not stretchy',
       'Stretchy',
       'Thin, slightly bloody',
       'Slimy',
       'Watery',
       'Foamy or crumbly',
-      'Lumpy, like cottage cheese, thick',
+      'Lumpy, like cottage cheese',
       'Variable',
       'Slimy / variable',
       'Thin, lumpy',
@@ -66,15 +67,16 @@ const dischargeAttributes = [
     icon: HealingIcon,
     options: [
       'None',
-      'Around ovulation / period',
+      'Around ovulation',
       'Shortly before/after period',
-      'Possibly itching, irritation',
+      'Itching, irritation',
       'Painful urination',
-      'Itching, redness, pain, fever',
+      'Redness, pain, fever',
       'Itching, burning',
       'Atypical for cycle timing',
       'Pain, fever, itching',
-      'Vulvar itching, dyspareunia, dysuria, discomfort, vulvitis and vaginitis',
+      'Pain during sexual intercourse',
+      'discomfort vulvitis and vaginitis',
       '“Strawberry cervix”'
     ]
   }
