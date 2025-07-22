@@ -106,8 +106,7 @@ const Calendar = () => {
           <DateCalendar
             onChange={(date) => {
               const selectedLog = logs.find(
-                (log) =>
-                  new Date(log.date).toDateString() === date.toDateString()
+                (log) => new Date(log.date).toDateString() === date.toDateString()
               )
               if (selectedLog) {
                 navigate(`/log/${selectedLog.date}`)

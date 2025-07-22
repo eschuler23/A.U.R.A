@@ -5,6 +5,7 @@ import InfoCard from '../../Components/InfoCard'
 import dischargeAttributes from '../../Constants/dischargeAttributes'
 import getDiagnoses from '../../Utils/diagnoses'
 import DiagnosisBanner from '../../Components/DiagnosisBanner'
+import { getImageFromStorage } from '../../Utils/imageStorage'
 
 const LogView = () => {
   const [options, setOptions] = useState(null)
@@ -24,7 +25,19 @@ const LogView = () => {
 
         if (foundLog) {
           setOptions(foundLog.selectedOptions)
-          setImage(foundLog.imageUrl)
+
+          // Try to load image from local storage first
+          if (foundLog.imageKey) {
+            const storedImage = getImageFromStorage(foundLog.imageKey)
+            if (storedImage) {
+              setImage(storedImage)
+            } else if (foundLog.imageUrl) {
+              // Fallback to imageUrl if local storage doesn't have the image
+              setImage(foundLog.imageUrl)
+            }
+          } else if (foundLog.imageUrl) {
+            setImage(foundLog.imageUrl)
+          }
         }
       } catch (error) {
         console.error('Fehler beim Laden des Logs:', error)
