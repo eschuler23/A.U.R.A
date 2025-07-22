@@ -10,6 +10,15 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import InfoCard from '../../Components/InfoCard'
 import dischargeAttributes from '../../Constants/dischargeAttributes'
+import {
+  fileToBase64,
+  saveImageToStorage,
+  getImageFromStorage,
+  generateImageKey,
+  removeImageFromStorage
+} from '../../Utils/imageStorage'
+
+const TEMP_IMAGE_KEY = 'temp_new_log_image'
 
 const LogEdit = () => {
   const navigate = useNavigate()
@@ -20,6 +29,7 @@ const LogEdit = () => {
     symptom: []
   })
   const [selectedImage, setSelectedImage] = useState(null)
+  const [imageKey, setImageKey] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -37,8 +47,21 @@ const LogEdit = () => {
 
         if (foundLog) {
           setSelectedOptions(foundLog.selectedOptions)
-          setSelectedImage(foundLog.imageUrl)
           setSelectedDate(new Date(foundLog.date))
+
+          // Try to load image from local storage first
+          if (foundLog.imageKey) {
+            const storedImage = getImageFromStorage(foundLog.imageKey)
+            if (storedImage) {
+              setSelectedImage(storedImage)
+              setImageKey(foundLog.imageKey)
+            } else if (foundLog.imageUrl) {
+              // Fallback to imageUrl if local storage doesn't have the image
+              setSelectedImage(foundLog.imageUrl)
+            }
+          } else if (foundLog.imageUrl) {
+            setSelectedImage(foundLog.imageUrl)
+          }
         }
       } catch (error) {
         console.error('Fehler beim Laden des Logs:', error)
@@ -48,6 +71,34 @@ const LogEdit = () => {
     fetchLog()
   }, [date])
 
+  // Load temporary image for new logs on page refresh
+  useEffect(() => {
+    if (date === 'new' && !selectedImage) {
+      const tempImage = getImageFromStorage(TEMP_IMAGE_KEY)
+      if (tempImage) {
+        setSelectedImage(tempImage)
+        setImageKey(TEMP_IMAGE_KEY)
+      }
+    }
+  }, [date, selectedImage])
+
+  // Cleanup temporary image when component unmounts (for new logs only)
+  useEffect(
+    () => () => {
+      // Only cleanup if we're creating a new log and the image wasn't saved
+      if (date === 'new' && imageKey === TEMP_IMAGE_KEY) {
+        // Add a small delay to allow submission to complete
+        setTimeout(() => {
+          const tempImage = getImageFromStorage(TEMP_IMAGE_KEY)
+          if (tempImage) {
+            removeImageFromStorage(TEMP_IMAGE_KEY)
+          }
+        }, 1000)
+      }
+    },
+    [date, imageKey]
+  )
+
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -56,18 +107,78 @@ const LogEdit = () => {
     setAnchorEl(null)
   }
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedImage(URL.createObjectURL(file))
+      try {
+        const base64Data = await fileToBase64(file)
+        let key
+
+        if (date === 'new') {
+          // For new logs, use temporary key until the log is saved
+          key = TEMP_IMAGE_KEY
+        } else if (!imageKey) {
+          // For existing logs without imageKey, generate a new one
+          let dateForKey
+          if (selectedDate) {
+            dateForKey = selectedDate.toISOString().split('T')[0]
+          } else if (date !== 'new') {
+            dateForKey = date
+          } else {
+            dateForKey = new Date().toISOString().split('T')[0]
+          }
+          key = generateImageKey(dateForKey)
+        } else {
+          // Use existing imageKey
+          key = imageKey
+        }
+
+        saveImageToStorage(key, base64Data)
+        setSelectedImage(base64Data)
+        setImageKey(key)
+      } catch (error) {
+        console.error('Error saving image to storage:', error)
+        // Fallback to URL.createObjectURL if local storage fails
+        setSelectedImage(URL.createObjectURL(file))
+      }
     }
     handleMenuClose()
   }
 
-  const handleCameraCapture = (event) => {
+  const handleCameraCapture = async (event) => {
     const file = event.target.files[0]
     if (file) {
-      setSelectedImage(URL.createObjectURL(file))
+      try {
+        const base64Data = await fileToBase64(file)
+        let key
+
+        if (date === 'new') {
+          // For new logs, use temporary key until the log is saved
+          key = TEMP_IMAGE_KEY
+        } else if (!imageKey) {
+          // For existing logs without imageKey, generate a new one
+          let dateForKey
+          if (selectedDate) {
+            dateForKey = selectedDate.toISOString().split('T')[0]
+          } else if (date !== 'new') {
+            dateForKey = date
+          } else {
+            dateForKey = new Date().toISOString().split('T')[0]
+          }
+          key = generateImageKey(dateForKey)
+        } else {
+          // Use existing imageKey
+          key = imageKey
+        }
+
+        saveImageToStorage(key, base64Data)
+        setSelectedImage(base64Data)
+        setImageKey(key)
+      } catch (error) {
+        console.error('Error saving image to storage:', error)
+        // Fallback to URL.createObjectURL if local storage fails
+        setSelectedImage(URL.createObjectURL(file))
+      }
     }
     handleMenuClose()
   }
@@ -91,15 +202,46 @@ const LogEdit = () => {
     const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
     const day = String(selectedDate.getDate()).padStart(2, '0')
     const formattedDate = `${year}-${month}-${day}`
+
+    // Handle image key for new logs
+    let finalImageKey = imageKey
+    if (date === 'new' && imageKey === TEMP_IMAGE_KEY) {
+      // Generate a permanent key for the new log
+      finalImageKey = generateImageKey(formattedDate)
+      // Move image from temporary to permanent storage
+      if (selectedImage) {
+        saveImageToStorage(finalImageKey, selectedImage)
+        // Remove temporary image
+        removeImageFromStorage(TEMP_IMAGE_KEY)
+      }
+    }
+
     const log = {
       selectedOptions,
       date: formattedDate,
-      imageUrl: selectedImage
+      // Only send imageUrl if it's not a base64 string (for backwards compatibility)
+      // For base64 images stored locally, only send the imageKey
+      imageUrl:
+        selectedImage && selectedImage.startsWith('data:')
+          ? null
+          : selectedImage,
+      imageKey: finalImageKey // Add imageKey to identify the image in local storage
     }
 
     try {
       let response
-      if (date) {
+
+      // Debug logging
+      console.log('Submitting log:', {
+        date,
+        formattedDate,
+        hasImage: !!selectedImage,
+        imageKey: finalImageKey,
+        imageSize: selectedImage ? selectedImage.length : 0,
+        isBase64: selectedImage?.startsWith('data:')
+      })
+
+      if (date && date !== 'new') {
         // Update existing log
         response = await fetch(`http://localhost:3001/logs/${date}`, {
           method: 'PUT',
@@ -120,6 +262,13 @@ const LogEdit = () => {
       }
 
       if (!response.ok) {
+        const errorText = await response.text()
+        console.error(
+          'Server response:',
+          response.status,
+          response.statusText,
+          errorText
+        )
         throw new Error(`Serverfehler: ${response.statusText}`)
       }
 
