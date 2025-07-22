@@ -6,6 +6,8 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { PickersDay } from '@mui/x-date-pickers/PickersDay'
+import DiagnosisBanner from '../../Components/DiagnosisBanner'
+import getDiagnoses from '../../Utils/diagnoses'
 
 const CustomDay = ({
   logs = [],
@@ -59,6 +61,9 @@ const Calendar = () => {
   const navigate = useNavigate()
 
   const [logs, setLogs] = useState([])
+  const diagnoses = getDiagnoses(
+    Object.values(logs[logs.length - 1] ?? {}).flat()
+  )
 
   useEffect(() => {
     fetch('http://localhost:3001/logs')
@@ -69,33 +74,50 @@ const Calendar = () => {
 
   return (
     <Stack
-      spacing={3}
-      alignItems="center"
-      justifyContent="center"
+      spacing={2}
       sx={{
-        width: '100%',
-        height: '100%',
-        padding: 3
+        padding: 3,
+        overflow: 'auto'
       }}
     >
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DateCalendar
-          onChange={(date) => {
-            const selectedLog = logs.find(
-              (log) => new Date(log.date).toDateString() === date.toDateString()
-            )
-            if (selectedLog) {
-              navigate(`/log/${selectedLog.date}`)
-            }
-          }}
-          slots={{ day: CustomDay }}
-          slotProps={{ day: { logs } }}
-        />
-      </LocalizationProvider>
+      <DiagnosisBanner
+        sx={{
+          // fullWidth: true,
+          width: '100%',
+          maxWidth: 600,
+          marginBottom: 2
+        }}
+        diagnoses={diagnoses}
+      />
+      <Stack
+        spacing={3}
+        alignItems="center"
+        justifyContent="center"
+        sx={{
+          width: '100%',
+          height: '100%',
+          padding: 3
+        }}
+      >
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DateCalendar
+            onChange={(date) => {
+              const selectedLog = logs.find(
+                (log) => new Date(log.date).toDateString() === date.toDateString()
+              )
+              if (selectedLog) {
+                navigate(`/log/${selectedLog.date}`)
+              }
+            }}
+            slots={{ day: CustomDay }}
+            slotProps={{ day: { logs } }}
+          />
+        </LocalizationProvider>
 
-      <Button onClick={() => navigate('/log/new')} sx={{ minWidth: '35px' }}>
-        +
-      </Button>
+        <Button onClick={() => navigate('/log/new')} sx={{ minWidth: '35px' }}>
+          +
+        </Button>
+      </Stack>
     </Stack>
   )
 }

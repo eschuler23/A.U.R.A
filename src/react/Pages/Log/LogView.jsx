@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom'
 import { Stack, Box } from '@mui/material'
 import InfoCard from '../../Components/InfoCard'
 import dischargeAttributes from '../../Constants/dischargeAttributes'
+import getDiagnoses from '../../Utils/diagnoses'
+import DiagnosisBanner from '../../Components/DiagnosisBanner'
 
 const LogView = () => {
   const [options, setOptions] = useState(null)
   const [image, setImage] = useState(null)
   const { date } = useParams()
 
+  const diagnoses = getDiagnoses(Object.values(options ?? {}).flat())
   useEffect(() => {
     if (!date) return
 
@@ -17,9 +20,7 @@ const LogView = () => {
         const response = await fetch('http://localhost:3001/logs')
         const logs = await response.json()
 
-        const foundLog = logs.find(
-          (log) => log.date === date
-        )
+        const foundLog = logs.find((log) => log.date === date)
 
         if (foundLog) {
           setOptions(foundLog.selectedOptions)
@@ -41,6 +42,7 @@ const LogView = () => {
         overflow: 'auto'
       }}
     >
+      <DiagnosisBanner diagnoses={diagnoses} />
       {image && (
         <Box
           component="img"
@@ -53,20 +55,23 @@ const LogView = () => {
           }}
         />
       )}
-      {options && Object.entries(options).map(([title, opt]) => {
-        const attribute = dischargeAttributes.find(attr => attr.key === title)
+      {options &&
+        Object.entries(options).map(([title, opt]) => {
+          const attribute = dischargeAttributes.find(
+            (attr) => attr.key === title
+          )
 
-        return (
-          <InfoCard
-            key={attribute.key}
-            attrKey={attribute.key}
-            title={attribute.title}
-            options={opt}
-            selectedOptions={opt}
-            icon={<attribute.icon />}
-          />
-        )
-      })}
+          return (
+            <InfoCard
+              key={attribute.key}
+              attrKey={attribute.key}
+              title={attribute.title}
+              options={opt}
+              selectedOptions={opt}
+              icon={<attribute.icon />}
+            />
+          )
+        })}
     </Stack>
   )
 }
