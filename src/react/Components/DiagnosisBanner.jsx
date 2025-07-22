@@ -12,6 +12,7 @@ const DiagnosisBanner = ({ diagnoses }) => (diagnoses ? (
     <b>{diagnoses.classification}</b>
     {diagnoses.diagnoses.map((diagnosis) => (
       <>
+        <b>Last entrys Diagnose:</b>
         <br />
         diagnosis:
         {` ${diagnosis.diagnosis}`}
@@ -29,7 +30,9 @@ const DiagnosisBanner = ({ diagnoses }) => (diagnoses ? (
       backgroundColor: '#d2d2d2'
     }}
   >
-    hihi
+    <b>Last entrys Diagnose:</b>
+    <br />
+    <i>No viable diagnosis</i>
   </Paper>
 ))
 

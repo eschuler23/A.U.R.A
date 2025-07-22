@@ -61,9 +61,11 @@ const Calendar = () => {
   const navigate = useNavigate()
 
   const [logs, setLogs] = useState([])
-  const diagnoses = getDiagnoses(
-    Object.values(logs[logs.length - 1] ?? {}).flat()
-  )
+  const lastLog = logs[logs.length - 1]
+  const tags = lastLog?.selectedOptions
+    ? Object.values(lastLog.selectedOptions).flat()
+    : []
+  const diagnoses = getDiagnoses(tags)
 
   useEffect(() => {
     fetch('http://localhost:3001/logs')
