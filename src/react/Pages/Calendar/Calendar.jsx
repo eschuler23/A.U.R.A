@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -59,6 +59,7 @@ CustomDay.propTypes = {
 
 const Calendar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [logs, setLogs] = useState([])
   const lastLog = logs[logs.length - 1]
@@ -72,7 +73,7 @@ const Calendar = () => {
       .then((res) => res.json())
       .then((data) => setLogs(data))
       .catch((err) => console.error('Fehler beim Laden der Logs:', err))
-  }, [])
+  }, [location.pathname])
 
   return (
     <Stack
@@ -105,7 +106,8 @@ const Calendar = () => {
           <DateCalendar
             onChange={(date) => {
               const selectedLog = logs.find(
-                (log) => new Date(log.date).toDateString() === date.toDateString()
+                (log) =>
+                  new Date(log.date).toDateString() === date.toDateString()
               )
               if (selectedLog) {
                 navigate(`/log/${selectedLog.date}`)
