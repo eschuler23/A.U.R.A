@@ -7,7 +7,12 @@ const diagnoses = {
       'None'
     ],
     diagnosis: 'normal white Discharge',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: 'normal',
+      color: '#d0ffd6',
+      severity: 0
+    }
   },
   lutealPhase: {
     tags: [
@@ -18,7 +23,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'lutheal Phase',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: 'normal',
+      color: '#d0ffd6',
+      severity: 0
+    }
 
   },
   cervicalMucusNonFertileCyclePhase: {
@@ -29,7 +39,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Cervical Mucus, outside ovulation',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: 'normal',
+      color: '#d0ffd6',
+      severity: 0
+    }
 
   },
   cervicalMucusFertileCyclePhaseOvulation: {
@@ -40,7 +55,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Cervical Mucus indicating ovulation',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: 'normal, use protection to prevent conception',
+      color: '#d0ffd6',
+      severity: 0
+    }
 
   },
   hormonalFluctuationPossiblyOvulatoryBleeding: {
@@ -53,7 +73,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'hormonal fluctuation, possibly ovulatory bleeding Ovulatory bleeding',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: 'mostly harmless, observe',
+      color: '#fff8d0',
+      severity: 0
+    }
 
   },
   oldBloodResidueHormonalFluctuation: {
@@ -64,7 +89,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Old blood residue, hormonal fluctuation',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#fff8d0',
+      severity: 0
+    }
 
   },
   bacterialVaginosis: {
@@ -76,7 +106,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Bacterial vaginosis',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 0
+    }
 
   },
   chlamydia: {
@@ -90,7 +125,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Chlamydia',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 1
+    }
 
   },
   Gonorrhoea: {
@@ -106,7 +146,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Gonorrhoea',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 1
+    }
 
   },
   vaginalFungusCandida: {
@@ -118,7 +163,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Vaginal fungus (Candida)',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 2
+    }
 
   },
   possibleSexuallyTransmittedDisease: {
@@ -129,7 +179,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Possible sexually transmitted disease',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 3
+    }
 
   },
   possibleInfection: {
@@ -141,7 +196,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Possible infection',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 3
+    }
 
   },
   trichomonads: {
@@ -152,7 +212,12 @@ const diagnoses = {
 
     ],
     diagnosis: 'Trichomonads',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: '',
+      color: '#ffd0d0',
+      severity: 3
+    }
 
   },
   vulvovaginalCandidiasis: {
@@ -166,7 +231,12 @@ const diagnoses = {
       'discomfort vulvitis and vaginitis'
     ],
     diagnosis: 'Vulvovaginal candidiasis',
-    recommendation: ''
+    recommendation: '',
+    classification: {
+      text: 'lmao',
+      color: '#ffd0d0',
+      severity: 3
+    }
 
   }
 }
