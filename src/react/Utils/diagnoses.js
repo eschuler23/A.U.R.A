@@ -6,7 +6,7 @@ export default function getDiagnoses(tags) {
   const matchedDiagnoses = Object.values(diagnoses)
     .filter(diagnosis => {
       const commonElements = diagnosis.tags.filter(tag => tags.includes(tag))
-      return commonElements.length >= 2
+      return commonElements.length >= 3
     })
 
   if (matchedDiagnoses.length === 0) {

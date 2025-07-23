@@ -72,7 +72,13 @@ const Calendar = () => {
 
   const [logs, setLogs] = useState([])
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const lastLog = logs[logs.length - 1]
+
+  // Sort logs by date to get the chronologically last entry
+  const sortedLogs = [...logs].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  )
+  const lastLog = sortedLogs[0] // Get the most recent log by date
+
   const tags = lastLog?.selectedOptions
     ? Object.values(lastLog.selectedOptions).flat()
     : []

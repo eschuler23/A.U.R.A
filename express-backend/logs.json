@@ -5,7 +5,7 @@
         "White (clear to milky)"
       ],
       "odor": [
-        "Possibly unpleasant"
+        "Unpleasant"
       ],
       "consistency": [
         "Thick"
@@ -29,10 +29,50 @@
         "Slimy"
       ],
       "symptom": [
-        "Vulvar itching, dyspareunia, dysuria, discomfort, vulvitis and vaginitis"
+        "discomfort vulvitis and vaginitis"
       ]
     },
-    "date": "2025-07-27",
+    "date": "2025-07-17",
     "imageUrl": "blob:http://192.168.178.117:8000/7f50df5e-7bff-45d8-908d-56c5d24a6be5"
+  },
+  {
+    "selectedOptions": {
+      "color": [
+        "White (clear to milky)",
+        "Whitish gray"
+      ],
+      "odor": [
+        "Neutral / no odor"
+      ],
+      "consistency": [
+        "Creamy, slightly viscous"
+      ],
+      "symptom": [
+        "None"
+      ]
+    },
+    "date": "2025-07-23",
+    "imageUrl": null,
+    "imageKey": "2025-07-23_1753299995730"
+  },
+  {
+    "selectedOptions": {
+      "color": [
+        "Clear"
+      ],
+      "odor": [
+        "Neutral / no odor"
+      ],
+      "consistency": [
+        "Thick",
+        "Stretchy"
+      ],
+      "symptom": [
+        "Around ovulation"
+      ]
+    },
+    "date": "2025-07-18",
+    "imageUrl": null,
+    "imageKey": "2025-07-18_1753300917175"
   }
 ]
