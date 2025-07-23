@@ -9,6 +9,17 @@ const Navbar = () => {
   const location = useLocation()
   const { date } = useParams()
 
+  const formatDateForDisplay = (dateString) => {
+    if (!dateString) return dateString
+
+    const dateObj = new Date(dateString)
+    const day = dateObj.getDate().toString().padStart(2, '0')
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0')
+    const year = dateObj.getFullYear()
+
+    return `${day}.${month}.${year}`
+  }
+
   const getPageConfig = () => {
     switch (location.pathname) {
       case '/':
@@ -34,7 +45,7 @@ const Navbar = () => {
         }
       case `/log/${date}`:
         return {
-          title: `${date}`,
+          title: formatDateForDisplay(date),
           showBackButton: true,
           showEditButton: true,
           backPath: '/',
@@ -50,7 +61,8 @@ const Navbar = () => {
     }
   }
 
-  const { title, showBackButton, showEditButton, backPath, editPath } = getPageConfig()
+  const { title, showBackButton, showEditButton, backPath, editPath } =
+    getPageConfig()
 
   const handleBackClick = () => {
     if (backPath) {
