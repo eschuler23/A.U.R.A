@@ -7,7 +7,7 @@ const diagnoses = {
       'None'
     ],
     diagnosis: 'normal white Discharge',
-    recommendation: '',
+    recommendation: 'beware moist environment, dont use panty liners to prevent bacteria build up',
     classification: {
       text: 'normal',
       color: '#d0ffd6',
@@ -23,7 +23,7 @@ const diagnoses = {
 
     ],
     diagnosis: 'lutheal Phase',
-    recommendation: '',
+    recommendation: 'Due to increased progesterone levels this is is a normal part of the menstrual cycle and helps prepare the uterus for potential implantation of a fertilized egg',
     classification: {
       text: 'normal',
       color: '#d0ffd6',
@@ -39,7 +39,7 @@ const diagnoses = {
 
     ],
     diagnosis: 'Cervical Mucus, outside ovulation',
-    recommendation: '',
+    recommendation: 'If close to menstration, this is an indication for unfertile window',
     classification: {
       text: 'normal',
       color: '#d0ffd6',
@@ -55,7 +55,7 @@ const diagnoses = {
 
     ],
     diagnosis: 'Cervical Mucus indicating ovulation',
-    recommendation: '',
+    recommendation: 'Around ovulation this is a sign of fertility, use protection to prevent conception',
     classification: {
       text: 'normal, use protection to prevent conception',
       color: '#d0ffd6',
@@ -73,11 +73,11 @@ const diagnoses = {
 
     ],
     diagnosis: 'hormonal fluctuation, possibly ovulatory bleeding Ovulatory bleeding',
-    recommendation: '',
+    recommendation: 'Observe and take picutres if persistend, might occur after exercise.',
     classification: {
       text: 'mostly harmless, observe',
       color: '#fff8d0',
-      severity: 0
+      severity: 1
     }
 
   },
@@ -89,11 +89,11 @@ const diagnoses = {
 
     ],
     diagnosis: 'Old blood residue, hormonal fluctuation',
-    recommendation: '',
+    recommendation: 'might be an indecation for starting menstruation, check for cycletypical timing',
     classification: {
       text: '',
       color: '#fff8d0',
-      severity: 0
+      severity: 1
     }
 
   },
