@@ -120,6 +120,7 @@ const diagnoses = {
       'Yellow',
       'Whitish gray',
       'Foul',
+      'Unpleasant',
       'Thick',
       'Painful urination'
 
@@ -224,7 +225,9 @@ const diagnoses = {
     tags: ['White (clear to milky)',
       'Milky white',
       'No / faint odor',
+      'Yeasty / sour',
       'Thick',
+      'Slimy',
       'Itching, irritation',
       'Painful urination',
       'Pain during sexual intercourse',
