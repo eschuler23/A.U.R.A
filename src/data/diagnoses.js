@@ -116,7 +116,6 @@ const diagnoses = {
   },
   chlamydia: {
     tags: [
-      'White (clear to milky)',
       'Yellow',
       'Whitish gray',
       'Foul',
@@ -222,7 +221,7 @@ const diagnoses = {
 
   },
   vulvovaginalCandidiasis: {
-    tags: ['White (clear to milky)',
+    tags: [
       'Milky white',
       'No / faint odor',
       'Yeasty / sour',
