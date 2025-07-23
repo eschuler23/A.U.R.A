@@ -10,7 +10,6 @@ app.use(express.json())
 
 const DATA_FILE = path.join(__dirname, 'logs.json')
 
-// Logs abrufen (GET)
 app.get('/logs', (req, res) => {
   const data = fs.existsSync(DATA_FILE)
     ? JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'))
@@ -18,7 +17,6 @@ app.get('/logs', (req, res) => {
   res.json(data)
 })
 
-// Log speichern (POST)
 app.post('/logs', (req, res) => {
   const log = req.body
   const existing = fs.existsSync(DATA_FILE)
@@ -29,7 +27,6 @@ app.post('/logs', (req, res) => {
   res.status(201).json({ success: true })
 })
 
-// Log aktualisieren (PUT)
 app.put('/logs/:date', (req, res) => {
   const { date } = req.params
   const updatedLog = req.body
@@ -38,10 +35,8 @@ app.put('/logs/:date', (req, res) => {
     ? JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'))
     : []
 
-  // Remove all entries with the same date to avoid duplicates
   const filteredLogs = existing.filter(log => log.date !== date)
 
-  // Add the updated log
   filteredLogs.push(updatedLog)
 
   fs.writeFileSync(DATA_FILE, JSON.stringify(filteredLogs, null, 2))
