@@ -22,13 +22,15 @@ const CustomDay = ({
     !outsideCurrentMonth &&
     logs.some((log) => new Date(log.date).toDateString() === day.toDateString())
 
+  const isFuture = day > new Date()
+
   return (
     <PickersDay
       day={day}
       outsideCurrentMonth={outsideCurrentMonth}
       selected={selected}
       today={today}
-      disabled={disabled}
+      disabled={disabled || isFuture}
       onDaySelect={onDaySelect}
       sx={{
         ...(isLogged && {
@@ -36,6 +38,13 @@ const CustomDay = ({
           color: 'white',
           '&:hover': {
             backgroundColor: 'primary.dark'
+          }
+        }),
+        ...(isFuture && {
+          color: 'text.disabled',
+          cursor: 'not-allowed',
+          '&:hover': {
+            backgroundColor: 'transparent'
           }
         })
       }}
@@ -62,6 +71,7 @@ const Calendar = () => {
   const location = useLocation()
 
   const [logs, setLogs] = useState([])
+  const [selectedDate, setSelectedDate] = useState(new Date())
   const lastLog = logs[logs.length - 1]
   const tags = lastLog?.selectedOptions
     ? Object.values(lastLog.selectedOptions).flat()
@@ -85,7 +95,6 @@ const Calendar = () => {
     >
       <DiagnosisBanner
         sx={{
-          // fullWidth: true,
           width: '100%',
           maxWidth: 600,
           marginBottom: 2
@@ -104,12 +113,17 @@ const Calendar = () => {
       >
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateCalendar
+            maxDate={new Date()}
+            value={selectedDate}
             onChange={(date) => {
-              const selectedLog = logs.find(
-                (log) => new Date(log.date).toDateString() === date.toDateString()
-              )
-              if (selectedLog) {
-                navigate(`/log/${selectedLog.date}`)
+              setSelectedDate(date)
+              if (date <= new Date()) {
+                const selectedLog = logs.find(
+                  (log) => new Date(log.date).toDateString() === date.toDateString()
+                )
+                if (selectedLog) {
+                  navigate(`/log/${selectedLog.date}`)
+                }
               }
             }}
             slots={{ day: CustomDay }}
@@ -117,7 +131,18 @@ const Calendar = () => {
           />
         </LocalizationProvider>
 
-        <Button onClick={() => navigate('/log/new')} sx={{ minWidth: '35px' }}>
+        <Button
+          onClick={() => {
+            const year = selectedDate.getFullYear()
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+            const day = String(selectedDate.getDate()).padStart(2, '0')
+            const formattedDate = `${year}-${month}-${day}`
+            console.log('Selected date:', selectedDate)
+            console.log('Formatted date for URL:', formattedDate)
+            navigate(`/log/new?date=${formattedDate}`)
+          }}
+          sx={{ minWidth: '35px' }}
+        >
           +
         </Button>
       </Stack>

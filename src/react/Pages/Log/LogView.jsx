@@ -26,13 +26,11 @@ const LogView = () => {
         if (foundLog) {
           setOptions(foundLog.selectedOptions)
 
-          // Try to load image from local storage first
           if (foundLog.imageKey) {
             const storedImage = getImageFromStorage(foundLog.imageKey)
             if (storedImage) {
               setImage(storedImage)
             } else if (foundLog.imageUrl) {
-              // Fallback to imageUrl if local storage doesn't have the image
               setImage(foundLog.imageUrl)
             }
           } else if (foundLog.imageUrl) {
