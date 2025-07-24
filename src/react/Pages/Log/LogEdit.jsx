@@ -63,15 +63,25 @@ const LogEdit = () => {
 
         if (foundLog) {
           setSelectedOptions(foundLog.selectedOptions)
-          setSelectedDate(new Date(foundLog.date))
+          // Fix timezone issue by using proper date parsing
+          const dateParts = foundLog.date.split('-')
+          const year = parseInt(dateParts[0], 10)
+          const month = parseInt(dateParts[1], 10) - 1 // Month is 0-indexed
+          const day = parseInt(dateParts[2], 10)
+          setSelectedDate(new Date(year, month, day))
 
           if (foundLog.imageKey) {
+            console.log('Looking for image with key:', foundLog.imageKey)
             const storedImage = getImageFromStorage(foundLog.imageKey)
             if (storedImage) {
+              console.log('Found stored image for key:', foundLog.imageKey)
               setSelectedImage(storedImage)
               setImageKey(foundLog.imageKey)
-            } else if (foundLog.imageUrl) {
-              setSelectedImage(foundLog.imageUrl)
+            } else {
+              console.log('No stored image found for key:', foundLog.imageKey)
+              if (foundLog.imageUrl) {
+                setSelectedImage(foundLog.imageUrl)
+              }
             }
           } else if (foundLog.imageUrl) {
             setSelectedImage(foundLog.imageUrl)
@@ -129,23 +139,54 @@ const LogEdit = () => {
         } else if (!imageKey) {
           let dateForKey
           if (selectedDate) {
-            dateForKey = selectedDate.toISOString().split('T')[0]
+            // Fix timezone issue by using proper date formatting
+            const year = selectedDate.getFullYear()
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+            const day = String(selectedDate.getDate()).padStart(2, '0')
+            dateForKey = `${year}-${month}-${day}`
           } else if (date !== 'new') {
             dateForKey = date
           } else {
-            dateForKey = new Date().toISOString().split('T')[0]
+            const now = new Date()
+            const year = now.getFullYear()
+            const month = String(now.getMonth() + 1).padStart(2, '0')
+            const day = String(now.getDate()).padStart(2, '0')
+            dateForKey = `${year}-${month}-${day}`
           }
+          console.log('Generating image key for date:', dateForKey)
           key = generateImageKey(dateForKey)
         } else {
           key = imageKey
         }
 
-        saveImageToStorage(key, base64Data)
-        setSelectedImage(base64Data)
-        setImageKey(key)
+        console.log('Saving image with key:', key)
+        try {
+          saveImageToStorage(key, base64Data)
+          setSelectedImage(base64Data)
+          setImageKey(key)
+          console.log('Image saved successfully to localStorage')
+        } catch (storageError) {
+          console.error('Failed to save to localStorage:', storageError)
+          // Show user-friendly message for storage quota issues
+          if (storageError.message.includes('Storage quota exceeded')) {
+            // eslint-disable-next-line no-alert
+            alert(`Storage is full! Your image cannot be saved permanently. 
+
+To save images permanently:
+1. Go to Storage Manager to backup/export your existing images
+2. Clear old images you no longer need
+3. Try uploading the image again
+
+Your log will be saved without the image.`)
+          }
+          // Don't save blob URLs - just clear the image
+          setSelectedImage(null)
+          setImageKey(null)
+        }
       } catch (error) {
-        console.error('Error saving image to storage:', error)
-        setSelectedImage(URL.createObjectURL(file))
+        console.error('Error processing image:', error)
+        setSelectedImage(null)
+        setImageKey(null)
       }
     }
     handleMenuClose()
@@ -163,23 +204,57 @@ const LogEdit = () => {
         } else if (!imageKey) {
           let dateForKey
           if (selectedDate) {
-            dateForKey = selectedDate.toISOString().split('T')[0]
+            // Fix timezone issue by using proper date formatting
+            const year = selectedDate.getFullYear()
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+            const day = String(selectedDate.getDate()).padStart(2, '0')
+            dateForKey = `${year}-${month}-${day}`
           } else if (date !== 'new') {
             dateForKey = date
           } else {
-            dateForKey = new Date().toISOString().split('T')[0]
+            const now = new Date()
+            const year = now.getFullYear()
+            const month = String(now.getMonth() + 1).padStart(2, '0')
+            const day = String(now.getDate()).padStart(2, '0')
+            dateForKey = `${year}-${month}-${day}`
           }
+          console.log('Generating image key for date:', dateForKey)
           key = generateImageKey(dateForKey)
         } else {
           key = imageKey
         }
 
-        saveImageToStorage(key, base64Data)
-        setSelectedImage(base64Data)
-        setImageKey(key)
+        console.log('Saving image with key:', key)
+        try {
+          saveImageToStorage(key, base64Data)
+          setSelectedImage(base64Data)
+          setImageKey(key)
+          console.log('Camera image saved successfully to localStorage')
+        } catch (storageError) {
+          console.error(
+            'Failed to save camera image to localStorage:',
+            storageError
+          )
+          // Show user-friendly message for storage quota issues
+          if (storageError.message.includes('Storage quota exceeded')) {
+            // eslint-disable-next-line no-alert
+            alert(`Storage is full! Your camera image cannot be saved permanently. 
+
+To save images permanently:
+1. Go to Storage Manager to backup/export your existing images
+2. Clear old images you no longer need
+3. Try taking the picture again
+
+Your log will be saved without the image.`)
+          }
+          // Don't save blob URLs - just clear the image
+          setSelectedImage(null)
+          setImageKey(null)
+        }
       } catch (error) {
-        console.error('Error saving image to storage:', error)
-        setSelectedImage(URL.createObjectURL(file))
+        console.error('Error processing camera image:', error)
+        setSelectedImage(null)
+        setImageKey(null)
       }
     }
     handleMenuClose()
@@ -215,18 +290,30 @@ const LogEdit = () => {
     if (date === 'new' && imageKey === TEMP_IMAGE_KEY) {
       finalImageKey = generateImageKey(formattedDate)
       if (selectedImage) {
-        saveImageToStorage(finalImageKey, selectedImage)
-        removeImageFromStorage(TEMP_IMAGE_KEY)
+        try {
+          saveImageToStorage(finalImageKey, selectedImage)
+          removeImageFromStorage(TEMP_IMAGE_KEY)
+        } catch (storageError) {
+          console.error(
+            'Failed to save image to storage, proceeding without image:',
+            storageError
+          )
+          // Still try to save the log without the image
+          finalImageKey = null
+        }
       }
     }
 
     const log = {
       selectedOptions,
       date: formattedDate,
+      // Only save imageUrl if it's NOT a blob URL and NOT base64 data
       imageUrl:
-        selectedImage && selectedImage.startsWith('data:')
-          ? null
-          : selectedImage,
+        selectedImage &&
+        !selectedImage.startsWith('data:') &&
+        !selectedImage.startsWith('blob:')
+          ? selectedImage
+          : null,
       imageKey: finalImageKey
     }
 

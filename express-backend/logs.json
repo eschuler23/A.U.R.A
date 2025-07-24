@@ -2,44 +2,22 @@
   {
     "selectedOptions": {
       "color": [
-        "White (clear to milky)"
+        "No discharge"
       ],
-      "odor": [
-        "Unpleasant"
-      ],
-      "consistency": [
-        "Thick"
-      ],
+      "odor": [],
+      "consistency": [],
       "symptom": [
-        "Shortly before/after period"
+        "None"
       ]
     },
     "date": "2025-07-10",
-    "imageUrl": "blob:http://192.168.178.117:8000/f3ab1a87-a7a0-4e41-8960-abc8cc5a753c"
+    "imageUrl": null,
+    "imageKey": null
   },
   {
     "selectedOptions": {
       "color": [
-        "Milky white"
-      ],
-      "odor": [
-        "Yeasty / sour"
-      ],
-      "consistency": [
-        "Slimy"
-      ],
-      "symptom": [
-        "discomfort vulvitis and vaginitis"
-      ]
-    },
-    "date": "2025-07-17",
-    "imageUrl": "blob:http://192.168.178.117:8000/7f50df5e-7bff-45d8-908d-56c5d24a6be5"
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "White (clear to milky)",
-        "Whitish gray"
+        "White (clear to milky)"
       ],
       "odor": [
         "Neutral / no odor"
@@ -53,26 +31,38 @@
     },
     "date": "2025-07-23",
     "imageUrl": null,
-    "imageKey": "2025-07-23_1753299995730"
+    "imageKey": null
   },
   {
     "selectedOptions": {
       "color": [
-        "Clear"
+        "White (clear to milky)"
       ],
       "odor": [
         "Neutral / no odor"
       ],
       "consistency": [
-        "Thick",
-        "Stretchy"
+        "Creamy, slightly viscous"
       ],
       "symptom": [
-        "Around ovulation"
+        "None"
       ]
     },
-    "date": "2025-07-18",
+    "date": "2025-07-24",
     "imageUrl": null,
-    "imageKey": "2025-07-18_1753300917175"
+    "imageKey": "2025-07-24_1753345224992"
+  },
+  {
+    "selectedOptions": {
+      "color": [
+        "White (clear to milky)"
+      ],
+      "odor": [],
+      "consistency": [],
+      "symptom": []
+    },
+    "date": "2025-07-05",
+    "imageUrl": null,
+    "imageKey": "2025-07-05_1753357062904"
   }
 ]

@@ -27,11 +27,16 @@ const LogView = () => {
           setOptions(foundLog.selectedOptions)
 
           if (foundLog.imageKey) {
+            console.log('Looking for image with key:', foundLog.imageKey)
             const storedImage = getImageFromStorage(foundLog.imageKey)
             if (storedImage) {
+              console.log('Found stored image for key:', foundLog.imageKey)
               setImage(storedImage)
-            } else if (foundLog.imageUrl) {
-              setImage(foundLog.imageUrl)
+            } else {
+              console.log('No stored image found for key:', foundLog.imageKey)
+              if (foundLog.imageUrl) {
+                setImage(foundLog.imageUrl)
+              }
             }
           } else if (foundLog.imageUrl) {
             setImage(foundLog.imageUrl)
