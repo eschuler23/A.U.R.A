@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Stack } from '@mui/material'
+import { Stack, Typography, Box } from '@mui/material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -93,7 +93,6 @@ const Calendar = () => {
 
   return (
     <Stack
-      spacing={2}
       sx={{
         padding: 3,
         overflow: 'auto'
@@ -107,15 +106,24 @@ const Calendar = () => {
         diagnoses={diagnoses}
       />
       <Stack
-        spacing={3}
+        spacing={2}
         alignItems="center"
         justifyContent="center"
         sx={{
           width: '100%',
           height: '100%',
-          padding: 3
+          padding: 3,
+          textAlign: 'center'
         }}
       >
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Welcome back!
+          </Typography>
+          <Typography variant="subtitle2">
+            It’s good to have you here. Your body deserves attention and care.
+          </Typography>
+        </Box>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateCalendar
             maxDate={new Date()}
