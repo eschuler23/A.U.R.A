@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Stack, Button } from '@mui/material'
+import { Stack } from '@mui/material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -129,6 +129,8 @@ const Calendar = () => {
                 )
                 if (selectedLog) {
                   navigate(`/log/${selectedLog.date}`)
+                } else {
+                  navigate(`/log/new?date=${date.toISOString().split('T')[0]}`)
                 }
               }
             }}
@@ -136,21 +138,6 @@ const Calendar = () => {
             slotProps={{ day: { logs } }}
           />
         </LocalizationProvider>
-
-        <Button
-          onClick={() => {
-            const year = selectedDate.getFullYear()
-            const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
-            const day = String(selectedDate.getDate()).padStart(2, '0')
-            const formattedDate = `${year}-${month}-${day}`
-            console.log('Selected date:', selectedDate)
-            console.log('Formatted date for URL:', formattedDate)
-            navigate(`/log/new?date=${formattedDate}`)
-          }}
-          sx={{ minWidth: '35px' }}
-        >
-          +
-        </Button>
       </Stack>
     </Stack>
   )
