@@ -7,7 +7,7 @@ const diagnoses = {
       'None'
     ],
     diagnosis: 'Normal white Discharge',
-    recommendation: 'Beware moist environment, dont use panty liners to prevent bacteria build up',
+    recommendation: 'Beware moist environment, breathable cotton underwear and good hygiene are equally important',
     classification: {
       text: 'Normal',
       color: 'success.main',
@@ -37,7 +37,7 @@ const diagnoses = {
       'None'
     ],
     diagnosis: 'Cervical Mucus, outside ovulation',
-    recommendation: 'If close to menstration, this is an indication for unfertile window',
+    recommendation: 'If close to menstration, this is an indication for unfertile window though sperm can survive up to 5 days.',
     classification: {
       text: 'Normal',
       color: 'success.main',
@@ -52,7 +52,7 @@ const diagnoses = {
       'None'
     ],
     diagnosis: 'Cervical Mucus indicating ovulation',
-    recommendation: 'Around ovulation this is a sign of fertility, use protection to prevent conception',
+    recommendation: 'If not trying to conceive, use protection, as this is peak fertility',
     classification: {
       text: 'Normal, use protection to prevent conception',
       color: 'success.main',
@@ -68,7 +68,7 @@ const diagnoses = {
       'Around ovulation',
       'Atypical for cycle timing'
     ],
-    diagnosis: 'Hormonal fluctuation, possibly ovulatory bleeding Ovulatory bleeding',
+    diagnosis: 'Hormonal fluctuation, possibly ovulatory bleeding',
     recommendation: 'Observe and take picutres if persistend, might occur after exercise. Keep logging symptoms daily to track progress.',
     classification: {
       text: 'Mostly harmless, observe',
@@ -84,7 +84,7 @@ const diagnoses = {
       'Shortly before/after period'
     ],
     diagnosis: 'Old blood residue, hormonal fluctuation',
-    recommendation: 'Might be old residue released due to exercise. Keep logging symptoms daily to track progress.',
+    recommendation: 'Might be old residue released due to exercise. Brown discharge at cycle boundaries is common and usually harmless when isolated. Keep logging symptoms daily to track progress.',
     classification: {
       text: 'Mostly harmless, observe',
       color: 'warning.main',
@@ -100,11 +100,11 @@ const diagnoses = {
       'Thin, lumpy'
     ],
     diagnosis: 'Bacterial vaginosis',
-    recommendation: 'Keep area dry, avoid douching, use only water to wash, wear cotton underwear.',
+    recommendation: 'Keep area dry, avoid douching, use only water to wash, wear cotton underwear. Keep logging symptoms daily to track progress.',
     classification: {
-      text: 'To visit a doctor is recommended',
+      text: 'To visit a doctor is recommended for testing and treatment with antibiotics',
       color: 'danger.main',
-      severity: 0
+      severity: 2
     }
   },
   chlamydia: {
@@ -117,18 +117,17 @@ const diagnoses = {
       'Painful urination'
     ],
     diagnosis: 'Chlamydia',
-    recommendation: 'Avoid sexual activity, hydrate, and monitor symptoms until you see a doctor. Keep logging symptoms daily to track progress.',
+    recommendation: 'Avoid sexual activity, hydrate, and monitor symptoms until you see a doctor since top priority is clinical testing. Keep logging symptoms daily to track progress.',
     classification: {
       text: 'Visiting a doctor is strongly recommended',
       color: 'danger.main',
-      severity: 1
+      severity: 3
     }
   },
   Gonorrhoea: {
     tags: [
       'Greenish',
       'Fishy / strong',
-      'Fishy',
       'Foamier',
       'Foamy or crumbly',
       'Itching, burning',
@@ -137,11 +136,11 @@ const diagnoses = {
       'Pain, fever, itching'
     ],
     diagnosis: 'Gonorrhoea',
-    recommendation: 'Avoid sex, stay clean and dry, do not self-medicate — see a doctor ASAP. Keep logging symptoms daily to track progress.',
+    recommendation: 'Avoid sex, stay clean and dry, do not self-medicate — see a doctor since it can cause pelvic inflammatory disease if untreated. Keep logging symptoms daily to track progress.',
     classification: {
       text: 'Visiting a doctor is strongly recommended',
       color: 'danger.main',
-      severity: 1
+      severity: 3
     }
   },
   vaginalFungusCandida: {
@@ -153,11 +152,11 @@ const diagnoses = {
       'Itching, burning'
     ],
     diagnosis: 'Vaginal fungus (Candida)',
-    recommendation: 'Use prescription-free ointment as remedy. Keep logging symptoms daily to track progress.',
+    recommendation: 'Use prescription-free ointment as remedy since it can often be self‑treated OTC, though doctor recommended if recurrence Keep logging symptoms daily to track progress.',
     classification: {
-      text: 'Visiting a doctor is strongly recommended to prevent misdiagnosis.',
+      text: 'Visiting a doctor is recommended to prevent misdiagnosis.',
       color: 'danger.main',
-      severity: 2
+      severity: 1
     }
   },
   possibleSexuallyTransmittedDisease: {
@@ -200,26 +199,6 @@ const diagnoses = {
     ],
     diagnosis: 'Trichomonads',
     recommendation: 'Avoid intercourse, maintain hygiene, don not use scented products, visit a doctor. Keep logging symptoms daily to track progress.',
-    classification: {
-      text: 'Visiting a doctor is strongly recommended.',
-      color: 'danger.main',
-      severity: 3
-    }
-  },
-  vulvovaginalCandidiasis: {
-    tags: [
-      'Milky white',
-      'No / faint odor',
-      'Yeasty / sour',
-      'Thick',
-      'Slimy',
-      'Itching, irritation',
-      'Painful urination',
-      'Pain during sexual intercourse',
-      'discomfort vulvitis and vaginitis'
-    ],
-    diagnosis: 'Vulvovaginal candidiasis',
-    recommendation: 'If symptoms occur for the first time, recur repeatedly or during pregnancy, a visit to the doctor is strongly recommended. Keep logging symptoms daily to track progress.',
     classification: {
       text: 'Visiting a doctor is strongly recommended.',
       color: 'danger.main',
