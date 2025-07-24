@@ -6,10 +6,10 @@ const diagnoses = {
       'Creamy, slightly viscous',
       'None'
     ],
-    diagnosis: 'normal white Discharge',
-    recommendation: 'beware moist environment, dont use panty liners to prevent bacteria build up',
+    diagnosis: 'Normal white Discharge',
+    recommendation: 'Beware moist environment, breathable cotton underwear and good hygiene are equally important',
     classification: {
-      text: 'normal',
+      text: 'Normal',
       color: 'success.main',
       severity: 0
     }
@@ -24,82 +24,87 @@ const diagnoses = {
     diagnosis: 'Lutheal phase',
     recommendation: 'Due to increased progesterone levels this is is a normal part of the menstrual cycle and helps prepare the uterus for potential implantation of a fertilized egg',
     classification: {
-      text: 'normal',
+      text: 'Normal',
       color: 'success.main',
       severity: 0
     }
   },
   cervicalMucusNonFertileCyclePhase: {
-    tags: ['Milky white',
+    tags: [
+      'Milky white',
       'Neutral / no odor',
       'Creamy, slightly viscous, not stretchy',
       'None'
     ],
     diagnosis: 'Cervical Mucus, outside ovulation',
-    recommendation: 'If close to menstration, this is an indication for unfertile window',
+    recommendation: 'If close to menstration, this is an indication for unfertile window though sperm can survive up to 5 days.',
     classification: {
-      text: 'normal',
+      text: 'Normal',
       color: 'success.main',
       severity: 0
     }
   },
   cervicalMucusFertileCyclePhaseOvulation: {
-    tags: ['Clear',
+    tags: [
+      'Clear',
       'Neutral / no odor',
       'Stretchy',
       'None'
     ],
     diagnosis: 'Cervical Mucus indicating ovulation',
-    recommendation: 'Around ovulation this is a sign of fertility, use protection to prevent conception',
+    recommendation: 'If not trying to conceive, use protection, as this is peak fertility',
     classification: {
-      text: 'normal, use protection to prevent conception',
+      text: 'Normal, use protection to prevent conception',
       color: 'success.main',
       severity: 0
     }
   },
   hormonalFluctuationPossiblyOvulatoryBleeding: {
-    tags: ['Pink',
+    tags: [
+      'Pink',
       'No / faint odor',
       'Thin, slightly bloody',
       'Shortly before/after period',
       'Around ovulation',
       'Atypical for cycle timing'
     ],
-    diagnosis: 'hormonal fluctuation, possibly ovulatory bleeding Ovulatory bleeding',
-    recommendation: 'Observe and take picutres if persistend, might occur after exercise.',
+    diagnosis: 'Hormonal fluctuation, possibly ovulatory bleeding',
+    recommendation: 'Observe and take picutres if persistend, might occur after exercise. Keep logging symptoms daily to track progress.',
     classification: {
-      text: 'mostly harmless, observe',
+      text: 'Mostly harmless, observe',
       color: 'warning.main',
       severity: 1
     }
   },
   oldBloodResidueHormonalFluctuation: {
-    tags: ['Brown',
+    tags: [
+      'Brown',
       'Metallic / old blood',
       'Slimy',
       'Shortly before/after period'
     ],
     diagnosis: 'Old blood residue, hormonal fluctuation',
-    recommendation: 'might be an indecation for starting menstruation, check for cycletypical timing',
+    recommendation: 'Might be old residue released due to exercise. Brown discharge at cycle boundaries is common and usually harmless when isolated. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'Mostly harmless, observe',
       color: 'warning.main',
       severity: 1
     }
   },
   bacterialVaginosis: {
-    tags: ['Whitish gray',
+    tags: [
+      'Whitish gray',
       'Fishy',
       'Thin',
       'Itching, irritation',
       'Thin, lumpy'
     ],
     diagnosis: 'Bacterial vaginosis',
-    recommendation: '',
+    recommendation: 'Keep area dry, avoid douching, use only water to wash, wear cotton underwear. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'To visit a doctor is recommended for testing and treatment with antibiotics',
       color: 'danger.main',
-      severity: 0
+      severity: 2
     }
   },
   chlamydia: {
@@ -112,17 +117,17 @@ const diagnoses = {
       'Painful urination'
     ],
     diagnosis: 'Chlamydia',
-    recommendation: '',
+    recommendation: 'Avoid sexual activity, hydrate, and monitor symptoms until you see a doctor since top priority is clinical testing. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'Visiting a doctor is strongly recommended',
       color: 'danger.main',
-      severity: 1
+      severity: 3
     }
   },
   Gonorrhoea: {
-    tags: ['Greenish',
+    tags: [
+      'Greenish',
       'Fishy / strong',
-      'Fishy',
       'Foamier',
       'Foamy or crumbly',
       'Itching, burning',
@@ -131,87 +136,71 @@ const diagnoses = {
       'Pain, fever, itching'
     ],
     diagnosis: 'Gonorrhoea',
-    recommendation: '',
+    recommendation: 'Avoid sex, stay clean and dry, do not self-medicate — see a doctor since it can cause pelvic inflammatory disease if untreated. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'Visiting a doctor is strongly recommended',
       color: 'danger.main',
-      severity: 1
+      severity: 3
     }
   },
   vaginalFungusCandida: {
-    tags: ['White-yellowish',
+    tags: [
+      'White-yellowish',
       'Yeasty / sour',
       'Lumpy, like cottage cheese',
       'Thick',
       'Itching, burning'
     ],
     diagnosis: 'Vaginal fungus (Candida)',
-    recommendation: '',
+    recommendation: 'Use prescription-free ointment as remedy since it can often be self‑treated OTC, though doctor recommended if recurrence Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'Visiting a doctor is recommended to prevent misdiagnosis.',
       color: 'danger.main',
-      severity: 2
+      severity: 1
     }
   },
   possibleSexuallyTransmittedDisease: {
-    tags: ['Pink (not related to cycle)',
+    tags: [
+      'Pink (not related to cycle)',
       'Unpleasant',
       'Variable',
       'Atypical for cycle timing'
     ],
     diagnosis: 'Possible sexually transmitted disease',
-    recommendation: '',
+    recommendation: 'Avoid sex, keep area clean, track symptoms, and seek urgent medical advice. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'Visiting a doctor is strongly recommended',
       color: 'danger.main',
       severity: 3
     }
   },
   possibleInfection: {
-    tags: ['Brown (with symptoms)',
+    tags: [
+      'Brown (with symptoms)',
       'Unpleasant',
       'Slimy / variable',
       'Redness, pain, fever',
       'Itching, irritation'
     ],
     diagnosis: 'Possible infection',
-    recommendation: '',
+    recommendation: 'Keep area clean, wear breathable underwear, avoid irritants, see a doctor promptly. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
+      text: 'Visiting a doctor is recommended.',
       color: 'danger.main',
       severity: 3
     }
   },
   trichomonads: {
-    tags: ['Yellow-green',
+    tags: [
+      'Yellow-green',
       'Unpleasant',
       'Foamier',
       'Sparse to abundant'
     ],
     diagnosis: 'Trichomonads',
-    recommendation: '',
+    recommendation: 'Avoid intercourse, maintain hygiene, don not use scented products, visit a doctor. Keep logging symptoms daily to track progress.',
     classification: {
-      text: '',
-      color: 'danger.main',
-      severity: 3
-    }
-  },
-  vulvovaginalCandidiasis: {
-    tags: [
-      'Milky white',
-      'No / faint odor',
-      'Yeasty / sour',
-      'Thick',
-      'Slimy',
-      'Itching, irritation',
-      'Painful urination',
-      'Pain during sexual intercourse',
-      'discomfort vulvitis and vaginitis'
-    ],
-    diagnosis: 'Vulvovaginal candidiasis',
-    recommendation: 'test',
-    classification: {
-      text: 'lmao',
+      text: 'Visiting a doctor is strongly recommended.',
       color: 'danger.main',
       severity: 3
     }
