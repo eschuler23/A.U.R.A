@@ -58,19 +58,6 @@ const LogView = () => {
         overflow: 'auto'
       }}
     >
-      <DiagnosisBanner diagnoses={diagnoses} />
-      {image && (
-        <Box
-          component="img"
-          src={image}
-          alt="Uploaded"
-          sx={{
-            width: '100%',
-            maxHeight: 300,
-            objectFit: 'contain'
-          }}
-        />
-      )}
       {options &&
         Object.entries(options).map(([title, opt]) => {
           const attribute = dischargeAttributes.find(
@@ -88,6 +75,19 @@ const LogView = () => {
             />
           )
         })}
+      <DiagnosisBanner diagnoses={diagnoses} />
+      {image && (
+        <Box
+          component="img"
+          src={image}
+          alt="Uploaded"
+          sx={{
+            width: '100%',
+            maxHeight: 300,
+            objectFit: 'contain'
+          }}
+        />
+      )}
     </Stack>
   )
 }

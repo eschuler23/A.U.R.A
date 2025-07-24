@@ -98,13 +98,6 @@ const Calendar = () => {
         overflow: 'auto'
       }}
     >
-      <DiagnosisBanner
-        sx={{
-          width: '100%',
-          maxWidth: 600
-        }}
-        diagnoses={diagnoses}
-      />
       <Stack
         spacing={2}
         alignItems="center"
@@ -146,6 +139,13 @@ const Calendar = () => {
           />
         </LocalizationProvider>
       </Stack>
+      <DiagnosisBanner
+        sx={{
+          width: '100%',
+          maxWidth: 600
+        }}
+        diagnoses={diagnoses}
+      />
     </Stack>
   )
 }
