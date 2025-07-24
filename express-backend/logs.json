@@ -13,56 +13,5 @@
     "date": "2025-07-10",
     "imageUrl": null,
     "imageKey": null
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "White (clear to milky)"
-      ],
-      "odor": [
-        "Neutral / no odor"
-      ],
-      "consistency": [
-        "Creamy, slightly viscous"
-      ],
-      "symptom": [
-        "None"
-      ]
-    },
-    "date": "2025-07-23",
-    "imageUrl": null,
-    "imageKey": null
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "White (clear to milky)"
-      ],
-      "odor": [
-        "Neutral / no odor"
-      ],
-      "consistency": [
-        "Creamy, slightly viscous"
-      ],
-      "symptom": [
-        "None"
-      ]
-    },
-    "date": "2025-07-24",
-    "imageUrl": null,
-    "imageKey": "2025-07-24_1753345224992"
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "White (clear to milky)"
-      ],
-      "odor": [],
-      "consistency": [],
-      "symptom": []
-    },
-    "date": "2025-07-05",
-    "imageUrl": null,
-    "imageKey": "2025-07-05_1753357062904"
   }
 ]

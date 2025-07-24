@@ -1,6 +1,6 @@
 import diagnoses from '../../data/diagnoses'
 
-// if 2 or more tags of the diagnosis match, return the all  diagnosis but the color of the most severe diagnosis
+// if 3 or more tags of the diagnosis match, return the all  diagnosis but the color of the most severe diagnosis
 
 export default function getDiagnoses(tags) {
   const matchedDiagnoses = Object.values(diagnoses)
