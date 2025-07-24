@@ -411,7 +411,7 @@ Your log will be saved without the image.`)
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
         <MenuItem component="div">
           <Button
-            variant="text"
+            variant="string"
             component="label"
             startIcon={<CameraIcon />}
             sx={{ justifyContent: 'flex-start', minWidth: '200px' }}
@@ -429,7 +429,7 @@ Your log will be saved without the image.`)
         </MenuItem>
         <MenuItem component="div">
           <Button
-            variant="text"
+            variant="string"
             component="label"
             startIcon={<UploadIcon />}
             sx={{ justifyContent: 'flex-start', minWidth: '200px' }}
