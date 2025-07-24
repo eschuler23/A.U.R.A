@@ -20,3 +20,5 @@ maps-data
 functions/static/**
 express-backend/.yarn/install-state.gz
 .yarn/install-state.gz
+express-backend/logs.json
+**/logs.json

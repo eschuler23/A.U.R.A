@@ -11,16 +11,15 @@ const DiagnosisBanner = ({ diagnoses }) => {
           backgroundColor: diagnoses.color
         }}
       >
-        <b>Diagnoses:</b>
-        <br />
+        <b>Diagnoses: </b>
         <b>{diagnoses.classification}</b>
         {diagnoses.diagnoses.map((diagnosis) => (
           <React.Fragment key={diagnosis.diagnosis}>
             <br />
-            diagnosis:
+            <h4>diagnosis:</h4>
             {` ${diagnosis.diagnosis}`}
             <br />
-            recommendation:
+            <h4>recommendation:</h4>
             {` ${diagnosis.recommendation}`}
             <br />
           </React.Fragment>

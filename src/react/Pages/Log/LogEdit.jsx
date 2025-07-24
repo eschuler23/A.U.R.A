@@ -37,18 +37,17 @@ const LogEdit = () => {
   const { date } = useParams()
 
   useEffect(() => {
-    if (date === 'new') {
-      const dateParam = searchParams.get('date')
-      if (dateParam) {
-        const parsedDate = new Date(`${dateParam}T00:00:00`)
-        if (!Number.isNaN(parsedDate.getTime())) {
-          setSelectedDate(parsedDate)
-        } else {
-          setSelectedDate(new Date())
-        }
+    const dateParam = searchParams.get('date')
+    if (!dateParam) return
+    if (dateParam) {
+      const parsedDate = new Date(`${dateParam}T00:00:00`)
+      if (!Number.isNaN(parsedDate.getTime())) {
+        setSelectedDate(parsedDate)
       } else {
         setSelectedDate(new Date())
       }
+    } else {
+      setSelectedDate(new Date())
     }
   }, [date, searchParams])
 
