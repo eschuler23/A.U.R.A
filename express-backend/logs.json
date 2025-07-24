@@ -2,77 +2,16 @@
   {
     "selectedOptions": {
       "color": [
-        "White (clear to milky)"
+        "No discharge"
       ],
-      "odor": [
-        "Unpleasant"
-      ],
-      "consistency": [
-        "Thick"
-      ],
-      "symptom": [
-        "Shortly before/after period"
-      ]
-    },
-    "date": "2025-07-10",
-    "imageUrl": "blob:http://192.168.178.117:8000/f3ab1a87-a7a0-4e41-8960-abc8cc5a753c"
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "Milky white"
-      ],
-      "odor": [
-        "Yeasty / sour"
-      ],
-      "consistency": [
-        "Slimy"
-      ],
-      "symptom": [
-        "discomfort vulvitis and vaginitis"
-      ]
-    },
-    "date": "2025-07-17",
-    "imageUrl": "blob:http://192.168.178.117:8000/7f50df5e-7bff-45d8-908d-56c5d24a6be5"
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "White (clear to milky)",
-        "Whitish gray"
-      ],
-      "odor": [
-        "Neutral / no odor"
-      ],
-      "consistency": [
-        "Creamy, slightly viscous"
-      ],
+      "odor": [],
+      "consistency": [],
       "symptom": [
         "None"
       ]
     },
-    "date": "2025-07-23",
+    "date": "2025-07-10",
     "imageUrl": null,
-    "imageKey": "2025-07-23_1753299995730"
-  },
-  {
-    "selectedOptions": {
-      "color": [
-        "Clear"
-      ],
-      "odor": [
-        "Neutral / no odor"
-      ],
-      "consistency": [
-        "Thick",
-        "Stretchy"
-      ],
-      "symptom": [
-        "Around ovulation"
-      ]
-    },
-    "date": "2025-07-18",
-    "imageUrl": null,
-    "imageKey": "2025-07-18_1753300917175"
+    "imageKey": null
   }
 ]
