@@ -102,8 +102,7 @@ const Calendar = () => {
       <DiagnosisBanner
         sx={{
           width: '100%',
-          maxWidth: 600,
-          marginBottom: 2
+          maxWidth: 600
         }}
         diagnoses={diagnoses}
       />

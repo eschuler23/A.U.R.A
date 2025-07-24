@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material'
+import { Paper, Typography, Box } from '@mui/material'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -7,22 +7,30 @@ const DiagnosisBanner = ({ diagnoses }) => {
     return (
       <Paper
         sx={{
-          padding: 3,
-          backgroundColor: diagnoses.color
+          p: 2,
+          backgroundColor: diagnoses.color,
+          textAlign: 'center'
         }}
       >
-        <b>Diagnoses: </b>
-        <b>{diagnoses.classification}</b>
+        <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+          Evaluation:
+          {diagnoses.classification}
+        </Typography>
         {diagnoses.diagnoses.map((diagnosis) => (
-          <React.Fragment key={diagnosis.diagnosis}>
-            <br />
-            <h4>diagnosis:</h4>
-            {` ${diagnosis.diagnosis}`}
-            <br />
-            <h4>recommendation:</h4>
-            {` ${diagnosis.recommendation}`}
-            <br />
-          </React.Fragment>
+          <Box key={diagnosis.diagnosis} sx={{ mt: 1 }}>
+            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+              Diagnose:
+            </Typography>
+            <Typography variant="body2">
+              {diagnosis.diagnosis}
+            </Typography>
+            <Typography variant="body2" sx={{ mt: 0.5, fontWeight: 'bold' }}>
+              Recommendation:
+            </Typography>
+            <Typography variant="body2">
+              {diagnosis.recommendation}
+            </Typography>
+          </Box>
         ))}
       </Paper>
     )
@@ -31,13 +39,17 @@ const DiagnosisBanner = ({ diagnoses }) => {
   return (
     <Paper
       sx={{
-        padding: 3,
-        backgroundColor: '#d2d2d2'
+        padding: 2,
+        backgroundColor: 'primary.light',
+        textAlign: 'center'
       }}
     >
-      <b>Last entrys Diagnose:</b>
-      <br />
-      <i>No viable diagnosis</i>
+      <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+        Diagnose
+      </Typography>
+      <Typography variant="subtitle2" sx={{ fontWeight: 'cursive' }}>
+        No viable diagnose for the last log!
+      </Typography>
     </Paper>
   )
 }
